@@ -1,0 +1,111 @@
+.container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.fish {
+  position: absolute;
+  will-change: transform;
+  pointer-events: auto;
+}
+
+@media (max-width: 950px){
+  .fish{
+    width: 203px
+  }
+}
+
+/* Directions */
+.leftRight {
+  top: 30%;
+  left: -150px;
+  animation-name: leftRight;
+  transform: scaleX(-1);
+}
+
+.rightLeft {
+  top: 60%;
+  left: 100vw;
+  animation-name: rightLeft;
+}
+
+.topDown {
+  top: -150px;
+  left: 20%;
+  animation-name: topDown;
+}
+
+.bottomUp {
+  top: 100vh;
+  left: 70%;
+  animation-name: bottomUp;
+}
+
+.diagonal1 {
+  top: -150px;
+  left: -150px;
+  animation-name: diagonal1;
+}
+
+.diagonal2 {
+  top: 100vh;
+  left: 100vw;
+  animation-name: diagonal2;
+}
+
+/* Keyframes */
+@keyframes leftRight {
+  from {
+    transform: translateX(0) scaleX(-1);
+  }
+  to {
+    transform: translateX(110vw) scaleX(-1);
+  }
+}
+
+@keyframes rightLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-110vw);
+  }
+}
+
+@keyframes topDown {
+  from {
+    transform: translateY(0) rotate(-85deg);
+  }
+  to {
+    transform: translateY(110vh) rotate(-85deg);
+  }
+}
+
+@keyframes bottomUp {
+  from {
+    transform: translateY(0) rotate(90deg);
+  }
+  to {
+    transform: translateY(-110vh) rotate(90deg);
+  }
+}
+
+@keyframes diagonal1 {
+  from {
+    transform: translate(0, 0) rotate(-145deg);
+  }
+  to {
+    transform: translate(110vw, 110vh) rotate(-145deg);
+  }
+}
+
+@keyframes diagonal2 {
+  from {
+    transform: translate(0, 0) rotate(45deg);
+  }
+  to {
+    transform: translate(-110vw, -110vh) rotate(45deg);
+  }
+}
