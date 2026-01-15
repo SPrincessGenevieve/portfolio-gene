@@ -135,6 +135,7 @@ export default function VintageAdminWeb({ onClick }: { onClick?: () => void }) {
                         loop
                         muted
                         playsInline
+                        preload="metadata"
                       >
                         <source src="/projects/admin_1.mp4" type="video/mp4" />
                       </video>

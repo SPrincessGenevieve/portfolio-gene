@@ -7,7 +7,12 @@ import Image from "next/image";
 import { Label } from "../ui/label";
 import Lilies from "../Lilies";
 import { motion, useInView } from "framer-motion";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 import { Button } from "../ui/button";
 
 export default function VintageWeb({ onClick }: { onClick?: () => void }) {
@@ -132,6 +137,7 @@ export default function VintageWeb({ onClick }: { onClick?: () => void }) {
                       loop
                       muted
                       playsInline
+                      preload="metadata"
                     >
                       <source src="/projects/vintage.mp4" type="video/mp4" />
                     </video>

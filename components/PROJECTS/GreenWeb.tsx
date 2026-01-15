@@ -126,6 +126,7 @@ export default function GreenWeb({ onClick }: { onClick?: () => void }) {
                         loop
                         muted
                         playsInline
+                        preload="metadata"
                       >
                         <source src="/projects/green.mp4" type="video/mp4" />
                       </video>

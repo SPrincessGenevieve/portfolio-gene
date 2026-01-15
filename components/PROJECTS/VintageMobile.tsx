@@ -128,6 +128,7 @@ export default function VintageMobile({ onClick }: { onClick?: () => void }) {
                         loop
                         muted
                         playsInline
+                        preload="metadata"
                       >
                         <source src="/projects/mobile_1.mp4" type="video/mp4" />
                       </video>

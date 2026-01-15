@@ -137,6 +137,7 @@ export default function VintageAffiliate({
                         loop
                         muted
                         playsInline
+                        preload="metadata"
                       >
                         <source
                           src="/projects/affiliate.mp4"
