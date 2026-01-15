@@ -6,7 +6,7 @@ import Title from "../Title";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Lilies from "../Lilies";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Mouse } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 
@@ -112,6 +112,7 @@ export default function WorkExperience({ onClick }: { onClick: () => void }) {
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
+                    <DialogTitle className="hidden"></DialogTitle>
                     <Label>{item.title}</Label>
                     <Label>{item.desc}</Label>
                   </DialogContent>

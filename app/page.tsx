@@ -18,7 +18,6 @@ import VintageAffiliate from "@/components/PROJECTS/VintageAffiate";
 export default function Home() {
   const ref = useRef<any>(null);
   const [displayDarkness, setDisplayDarkness] = useState(0);
-  console.log("IS IN VIEW: ", ref);
 
   // Handle Ripple Init
   useEffect(() => {

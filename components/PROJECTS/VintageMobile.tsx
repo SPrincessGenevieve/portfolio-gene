@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Label } from "../ui/label";
 import Lilies from "../Lilies";
 import { motion, useInView } from "framer-motion";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
 
 export default function VintageMobile({ onClick }: { onClick?: () => void }) {
@@ -120,6 +120,7 @@ export default function VintageMobile({ onClick }: { onClick?: () => void }) {
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="w-auto max-w-none sm:max-w-[80%] h-auto p-2 bg-black/70">
+                    <DialogTitle className="hidden"></DialogTitle>
                     <div className="flex h-full max-w-90 min-w-70 items-center justify-center">
                       <video
                         className="rounded-[10px] w-auto h-full object-contain"

@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Label } from "../ui/label";
 import Lilies from "../Lilies";
 import { motion, useInView } from "framer-motion";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
 
 export default function GreenWeb({ onClick }: { onClick?: () => void }) {
@@ -117,7 +117,8 @@ export default function GreenWeb({ onClick }: { onClick?: () => void }) {
                       <PlayIcon></PlayIcon> DEMO
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[90%] h-auto p-2 bg-black/70">
+                  <DialogContent className="sm:max-w-[90%] h-[90&] p-2 bg-black/70">
+                    <DialogTitle className="hidden"></DialogTitle>
                     <div className="flex h-full items-center justify-center">
                       <video
                         className="w-full h-full object-cover"
