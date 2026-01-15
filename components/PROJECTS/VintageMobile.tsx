@@ -6,7 +6,12 @@ import Image from "next/image";
 import { Label } from "../ui/label";
 import Lilies from "../Lilies";
 import { motion, useInView } from "framer-motion";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 import { Button } from "../ui/button";
 
 export default function VintageMobile({ onClick }: { onClick?: () => void }) {
@@ -119,20 +124,16 @@ export default function VintageMobile({ onClick }: { onClick?: () => void }) {
                       <PlayIcon></PlayIcon> DEMO
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="w-auto max-w-none sm:max-w-[80%] h-auto p-2 bg-black/70">
+                  <DialogContent className="w-full h-[90%] p-2 bg-black/70">
                     <DialogTitle className="hidden"></DialogTitle>
-                    <div className="flex h-full max-w-90 min-w-70 items-center justify-center">
-                      <video
-                        className="rounded-[10px] w-auto h-full object-contain"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="metadata"
-                      >
-                        <source src="/projects/mobile_1.mp4" type="video/mp4" />
-                      </video>
-                    </div>
+                    <iframe
+                      className="w-full h-full rounded-2xl"
+                      src="https://www.youtube.com/embed/WAjTQF2T0xc?autoplay=1&loop=1&playlist=WAjTQF2T0xc&mute=1&controls=0&rel=0"
+                      title="Vintage Demo"
+                      frameBorder="0"
+                      allow="autoplay; encrypted-media"
+                      allowFullScreen
+                    ></iframe>
                   </DialogContent>
                 </Dialog>
                 <div className="flex gap-2 w-full justify-end">

@@ -7,7 +7,12 @@ import Image from "next/image";
 import { Label } from "../ui/label";
 import Lilies from "../Lilies";
 import { motion, useInView } from "framer-motion";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 import { Button } from "../ui/button";
 
 export default function VintageAffiliate({
@@ -42,7 +47,6 @@ export default function VintageAffiliate({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
 
   return (
     <div className="w-full h-full relative flex flex-col items-center justify-center">
@@ -128,22 +132,17 @@ export default function VintageAffiliate({
                       <PlayIcon></PlayIcon> DEMO
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[90%] h-[90&] p-2 bg-black/70">
+                  <DialogContent className="sm:max-w-[90%] h-[90%] p-2 bg-black/70">
                     <DialogTitle className="hidden"></DialogTitle>
                     <div className="flex h-full items-center justify-center">
-                      <video
-                        className="w-full h-full object-cover"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="metadata"
-                      >
-                        <source
-                          src="/projects/affiliate.mp4"
-                          type="video/mp4"
-                        />
-                      </video>
+                      <iframe
+                        className="w-full h-full"
+                        src="https://www.youtube.com/embed/w7QSPf53hZM?autoplay=1&loop=1&playlist=w7QSPf53hZM&mute=1&controls=0&rel=0"
+                        title="Green Future Demo"
+                        frameBorder="0"
+                        allow="autoplay; encrypted-media"
+                        allowFullScreen
+                      ></iframe>
                     </div>
                   </DialogContent>
                 </Dialog>

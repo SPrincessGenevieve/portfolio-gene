@@ -7,7 +7,12 @@ import Image from "next/image";
 import { Label } from "../ui/label";
 import Lilies from "../Lilies";
 import { motion, useInView } from "framer-motion";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 import { Button } from "../ui/button";
 
 export default function GreenWeb({ onClick }: { onClick?: () => void }) {
@@ -117,19 +122,17 @@ export default function GreenWeb({ onClick }: { onClick?: () => void }) {
                       <PlayIcon></PlayIcon> DEMO
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[90%] h-[90&] p-2 bg-black/70">
+                  <DialogContent className="sm:max-w-[90%] h-[90%] p-2 bg-black/70">
                     <DialogTitle className="hidden"></DialogTitle>
                     <div className="flex h-full items-center justify-center">
-                      <video
-                        className="w-full h-full object-cover"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="metadata"
-                      >
-                        <source src="/projects/green.mp4" type="video/mp4" />
-                      </video>
+                      <iframe
+                        className="w-full h-full"
+                        src="https://www.youtube.com/embed/JbM2V3H1_XQ?autoplay=1&loop=1&playlist=JbM2V3H1_XQ&mute=1&controls=0&rel=0"
+                        title="Green Future Demo"
+                        frameBorder="0"
+                        allow="autoplay; encrypted-media"
+                        allowFullScreen
+                      ></iframe>
                     </div>
                   </DialogContent>
                 </Dialog>

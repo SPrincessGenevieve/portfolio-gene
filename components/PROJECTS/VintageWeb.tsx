@@ -129,18 +129,18 @@ export default function VintageWeb({ onClick }: { onClick?: () => void }) {
                       <PlayIcon></PlayIcon> DEMO
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[90%] h-[90&] p-2 bg-black/70">
+                  <DialogContent className="sm:max-w-[90%] h-[90vh] p-2 bg-black/70">
                     <DialogTitle className="hidden"></DialogTitle>
-                    <video
-                      className="w-full h-full object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="metadata"
-                    >
-                      <source src="/projects/vintage.mp4" type="video/mp4" />
-                    </video>
+                    <div className="relative w-auto h-full">
+                      <iframe
+                        className="w-full h-full"
+                        src="https://www.youtube.com/embed/12BPFET28rM?autoplay=1&loop=1&playlist=12BPFET28rM&mute=1&controls=0&rel=0"
+                        title="Vintage Demo"
+                        frameBorder="0"
+                        allow="autoplay; encrypted-media"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
                   </DialogContent>
                 </Dialog>
                 <div className="flex gap-2 w-full justify-end">

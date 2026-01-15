@@ -7,7 +7,12 @@ import Image from "next/image";
 import { Label } from "../ui/label";
 import Lilies from "../Lilies";
 import { motion, useInView } from "framer-motion";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 import { Button } from "../ui/button";
 
 export default function VintageAdminWeb({ onClick }: { onClick?: () => void }) {
@@ -126,19 +131,18 @@ export default function VintageAdminWeb({ onClick }: { onClick?: () => void }) {
                       <PlayIcon></PlayIcon> DEMO
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[90%] h-[90&] p-2 bg-black/70">
+
+                  <DialogContent className="sm:max-w-[90%] h-[90vh] p-2 bg-black/70">
                     <DialogTitle className="hidden"></DialogTitle>
-                    <div className="flex h-full items-center justify-center">
-                      <video
-                        className="w-full h-full object-cover"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="metadata"
-                      >
-                        <source src="/projects/admin_1.mp4" type="video/mp4" />
-                      </video>
+                    <div className="relative w-auto h-full">
+                      <iframe
+                        className="w-full h-full"
+                        src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&loop=1&playlist=h1HGAU8vq5Y&mute=1&controls=0&rel=0"
+                        title="Vintage Demo"
+                        frameBorder="0"
+                        allow="autoplay; encrypted-media"
+                        allowFullScreen
+                      ></iframe>
                     </div>
                   </DialogContent>
                 </Dialog>
