@@ -13,23 +13,12 @@ import VintageMobile from "@/components/PROJECTS/VintageMobile";
 import VintageAdminWeb from "@/components/PROJECTS/VintageAdminWeb";
 import GreenWeb from "@/components/PROJECTS/GreenWeb";
 import Footer from "@/components/FOOTER/footer";
+import VintageAffiliate from "@/components/PROJECTS/VintageAffiate";
 
 export default function Home() {
   const ref = useRef<any>(null);
   const [displayDarkness, setDisplayDarkness] = useState(0);
-
-  const [screenWidth, setScreenWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 0
-  );
-
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  console.log("SCREEN WIDTH:", screenWidth);
+  console.log("IS IN VIEW: ", ref);
 
   // Handle Ripple Init
   useEffect(() => {
@@ -70,12 +59,12 @@ export default function Home() {
 
   const backgroundStyle = {
     backgroundColor: interpolateColor(displayDarkness),
-    transition: "background-color 0.3s ease", // smooth transition
+    transition: "background-color 0.5s ease-in-out", // smooth transition
   };
 
   return (
     <div
-      className="relative bg-ripple min-h-screen w-full h-full font-sans"
+      className="relative bg-ripple min-h-screen  w-full h-full font-sans"
       style={backgroundStyle}
     >
       {/* Keep fish and orbs */}
@@ -84,13 +73,16 @@ export default function Home() {
         <SwimmingFish />
       </div>
 
-      <Parallax pages={8.6} ref={ref}>
+      <Parallax pages={9.6} ref={ref}>
         <ParallaxLayer
           offset={0}
           speed={1}
           className="flex items-center justify-center bg-linear-to-t/srgb from-[#04084700] from-10% via-[#0408479d] via-50% to-[#04084700]"
         >
-          <Intro contact={() => ref.current?.scrollTo(8)} onClick={() => ref.current?.scrollTo(1)} />
+          <Intro
+            contact={() => ref.current?.scrollTo(9)}
+            onClick={() => ref.current?.scrollTo(1)}
+          />
         </ParallaxLayer>
 
         <ParallaxLayer offset={1} speed={0.5}>
@@ -107,28 +99,25 @@ export default function Home() {
         <ParallaxLayer offset={4} speed={0.5}>
           <VintageWeb onClick={() => ref.current?.scrollTo(5)}></VintageWeb>
         </ParallaxLayer>
-        <ParallaxLayer
-          onClick={() => ref.current?.scrollTo(6)}
-          offset={5}
-          speed={0.5}
-        >
-          <VintageMobile></VintageMobile>
+        <ParallaxLayer offset={5} speed={0.5}>
+          <VintageMobile
+            onClick={() => ref.current?.scrollTo(6)}
+          ></VintageMobile>
         </ParallaxLayer>
-        <ParallaxLayer
-          onClick={() => ref.current?.scrollTo(7)}
-          offset={6}
-          speed={0.5}
-        >
-          <VintageAdminWeb></VintageAdminWeb>
+        <ParallaxLayer offset={6} speed={0.5}>
+          <VintageAdminWeb
+            onClick={() => ref.current?.scrollTo(7)}
+          ></VintageAdminWeb>
         </ParallaxLayer>
-        <ParallaxLayer
-          onClick={() => ref.current?.scrollTo(8)}
-          offset={7}
-          speed={0.5}
-        >
-          <GreenWeb></GreenWeb>
+        <ParallaxLayer offset={7} speed={0.5}>
+          <VintageAffiliate
+            onClick={() => ref.current?.scrollTo(8)}
+          ></VintageAffiliate>
         </ParallaxLayer>
-        <ParallaxLayer offset={8} speed={0.4} factor={1}>
+        <ParallaxLayer offset={8} speed={0.5}>
+          <GreenWeb onClick={() => ref.current?.scrollTo(9)}></GreenWeb>
+        </ParallaxLayer>
+        <ParallaxLayer offset={9} speed={0.4} factor={1}>
           <Footer></Footer>
         </ParallaxLayer>
       </Parallax>

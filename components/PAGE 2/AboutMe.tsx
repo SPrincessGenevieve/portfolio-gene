@@ -6,8 +6,13 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import Lilies from "../Lilies";
 import { Mouse } from "lucide-react";
+import Link from "next/link";
+import { motion, useInView } from "framer-motion";
 
 export default function AboutMe({ onClick }: { onClick: () => void }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { amount: 0.4 });
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [screenWidth, setScreenWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0
   );
@@ -21,40 +26,95 @@ export default function AboutMe({ onClick }: { onClick: () => void }) {
 
   return (
     <div className="w-full h-full flex items-center justify-center p-4">
-      <div className="flex flex-row-reverse gap-4 z-40 p-4 items-center justify-center cont-width">
-        <Image
-          src={"/me.png"}
-          width={400}
-          height={400}
-          alt=""
-          className="object-contain shadow-black  h-[35vh] z-40"
-        ></Image>
-        <div className="flex flex-col items-start gap-4 about-me-desc w-[70%]">
+      <motion.section
+        ref={sectionRef}
+        className="flex flex-row-reverse gap-4 z-40 p-4 items-center justify-center cont-width"
+      >
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, scale: 0.8, rotate: 30 }}
+          animate={
+            isInView ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0 }
+          }
+          transition={{
+            rotate: {
+              type: "spring",
+              stiffness: 220,
+              damping: 18,
+              duration: 3,
+              delay: 0.5,
+            },
+            scale: {
+              type: "spring",
+              stiffness: 200,
+              damping: 20,
+            },
+            opacity: { duration: 1 },
+          }}
+        >
+          <Image
+            src={"/me.png"}
+            width={400}
+            height={400}
+            alt=""
+            className="object-contain shadow-black  h-[35vh] z-40"
+          ></Image>
+        </motion.div>
+
+        <div className="flex flex-col z-80 items-start gap-4 about-me-desc w-[70%]">
           <div className="flex flex-col justify-center">
-            <Title text="ABOUT ME"></Title>
-            <Label
-              className={`font-thin ${
-                screenWidth <= 1000 ? "text-[1.4vh]" : ""
-              } uppercase text-shadow-black [text-shadow:0px_0px_20px_rgba(0,0,0,1)]`}
+            <motion.div
+              ref={ref}
+              initial={{ opacity: 0, x: -100 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0 }}
+              transition={{
+                opacity: { delay: 0.1 },
+                x: { delay: 0.1, duration: 0.5 },
+              }}
             >
-              Frontend Developer with 1+ year of experience building responsive,
-              scalable web applications using React and Next.js. Experienced in
-              translating UI/UX designs into high-quality code, integrating
-              APIs, and optimizing performance. Strong background in modern
-              JavaScript, component-driven architecture, and real-world business
-              applications.
-            </Label>
+              <Title text="ABOUT ME"></Title>
+            </motion.div>
+            <motion.div
+              ref={ref}
+              initial={{ opacity: 0, x: -100 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0 }}
+              transition={{
+                opacity: { delay: 0.2 },
+                x: { delay: 0.2, duration: 0.5 },
+              }}
+            >
+              <Label
+                className={`font-thin ${
+                  screenWidth <= 1000 ? "text-[1.4vh]" : ""
+                } uppercase text-shadow-black [text-shadow:0px_0px_20px_rgba(0,0,0,1)]`}
+              >
+                Frontend Developer with 2+ year of experience building
+                responsive, scalable web applications using React and Next.js.
+                Experienced in translating UI/UX designs into high-quality code,
+                integrating APIs, and optimizing performance. Strong background
+                in modern JavaScript, component-driven architecture, and
+                real-world business applications.
+              </Label>
+            </motion.div>
           </div>
-          <div>
-            <Button className=" hover:shadow-blue-400/70 transition border border-transparent hover:border-blue-400 duration-200 ease-in-out hover:shadow-xl">
-              DOWNLOAD CV
-            </Button>
-          </div>
+          <motion.div
+            ref={ref}
+            initial={{ opacity: 0, x: -100 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0 }}
+            transition={{
+              opacity: { delay: 0.3 },
+              x: { delay: 0.3, duration: 0.5 },
+            }}
+          >
+            <Link target="_blank" href={"/CV.pdf"}>
+              <Button className=" z-90">DOWNLOAD CV</Button>
+            </Link>
+          </motion.div>
         </div>
-      </div>
+      </motion.section>
 
       <Lilies maxCount={8} minSize={250} maxSize={320}></Lilies>
-      <div className="w-full z-50 h-full absolute bottom-0 flex items-center justify-center">
+      <div className="w-full z-40  absolute bottom-0 flex items-center justify-center">
         <Mouse
           onClick={onClick}
           size={50}
