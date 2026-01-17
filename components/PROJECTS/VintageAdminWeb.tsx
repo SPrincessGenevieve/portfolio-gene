@@ -137,7 +137,7 @@ export default function VintageAdminWeb({ onClick }: { onClick?: () => void }) {
                     <div className="relative w-auto h-full">
                       <iframe
                         className="w-full h-full"
-                        src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&loop=1&playlist=h1HGAU8vq5Y&mute=1&controls=0&rel=0"
+                        src="https://www.youtube.com/embed/3fm6bWiWKEw?autoplay=1&loop=1&playlist=3fm6bWiWKEw&mute=1&controls=0&rel=0"
                         title="Vintage Demo"
                         frameBorder="0"
                         allow="autoplay; encrypted-media"
