@@ -88,12 +88,11 @@ export default function AboutMe({ onClick }: { onClick: () => void }) {
                   screenWidth <= 1000 ? "text-[1.4vh]" : ""
                 } uppercase text-shadow-black [text-shadow:0px_0px_20px_rgba(0,0,0,1)]`}
               >
-                Frontend Developer with 2+ year of experience building
-                responsive, scalable web applications using React and Next.js.
-                Experienced in translating UI/UX designs into high-quality code,
-                integrating APIs, and optimizing performance. Strong background
-                in modern JavaScript, component-driven architecture, and
-                real-world business applications.
+                Full-stack developer with 2+ years of experience, primarily
+                focused on frontend development using React and Next.js. Skilled
+                in translating UI/UX designs into responsive, high-performance
+                interfaces, while also capable of handling backend integrations
+                and API development as needed.
               </Label>
             </motion.div>
           </div>

@@ -18,7 +18,7 @@ const stack = [
   { label: "Framer Motion", icon: "/stack/motion.png" },
   { label: "Axios", icon: "/stack/axios.png" },
   { label: "Git", icon: "/stack/git.png" },
-  { label: "Vercel", icon: "/stack/vercel.png" },
+  { label: "Django", icon: "/stack/django.svg" },
 ];
 
 const shuffle = <T,>(arr: T[]) => [...arr].sort(() => Math.random() - 0.5);

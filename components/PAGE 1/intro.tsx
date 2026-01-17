@@ -93,10 +93,10 @@ export default function Intro({
             className="text-center flex flex-col items-center justify-center"
           >
             <Label className="font-light" variant="h2">
-              FRONTEND DEVELOPER
+              REACT | NEXTJS | DJANGO
             </Label>
             <Label className="font-light" variant="h2">
-              REACT | NEXTJS
+              FULL-STACK DEVELOPER
             </Label>
           </motion.div>
 
