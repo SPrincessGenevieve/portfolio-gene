@@ -27,12 +27,7 @@ const rand = (min: number, max: number) => Math.random() * (max - min) + min;
 /* -------------------------------------------------- */
 /* Helper: compute fish transform BEFORE first paint  */
 /* -------------------------------------------------- */
-function getFishTransform(
-  direction: string,
-  t: number,
-  w: number,
-  h: number,
-) {
+function getFishTransform(direction: string, t: number, w: number, h: number) {
   let x = 0;
   let y = 0;
   let rotation = 0;
@@ -80,11 +75,10 @@ function getFishTransform(
 
 export default function SwimmingFish() {
   const fishRefs = useRef<HTMLDivElement[]>([]);
+  const lastTime = useRef<number | null>(null);
 
   // 🔑 Random starting progress PER FISH
-  const progress = useRef<number[]>(
-    directions.map(() => Math.random()),
-  );
+  const progress = useRef<number[]>(directions.map(() => Math.random()));
 
   const [showFish, setShowFish] = useState(false);
 
@@ -118,30 +112,39 @@ export default function SwimmingFish() {
 
     let raf: number;
 
-    const animate = () => {
+    const animate = (time: number) => {
+      if (lastTime.current === null) {
+        lastTime.current = time;
+      }
+
+      const delta = time - lastTime.current;
+      lastTime.current = time;
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      const baseSpeed = isMobile ? 0.08 : 0.06;
+
       fishRefs.current.forEach((fish, i) => {
         if (!fish) return;
 
         const { speed } = springs[i][0];
-        progress.current[i] += 0.001 * speed.get();
+
+        // ✅ Time-based movement (normalized to 60fps)
+        progress.current[i] += (delta / 1000) * baseSpeed * speed.get();
         const t = progress.current[i] % 1;
 
         const w = window.innerWidth;
         const h = window.innerHeight;
 
-        fish.style.transform = getFishTransform(
-          directions[i],
-          t,
-          w,
-          h,
-        );
+        fish.style.transform = getFishTransform(directions[i], t, w, h);
       });
 
       raf = requestAnimationFrame(animate);
     };
 
     raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      lastTime.current = null;
+    };
   }, [springs, showFish]);
 
   return (
@@ -181,13 +184,7 @@ export default function SwimmingFish() {
                 })
               }
             >
-              <Image
-                src={gif}
-                alt="Fish"
-                width={size}
-                height={size}
-                priority
-              />
+              <Image src={gif} alt="Fish" width={size} height={size} priority />
             </div>
           );
         })}

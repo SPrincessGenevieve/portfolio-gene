@@ -6,9 +6,9 @@
 }
 
 .fish {
-  position: absolute;
   will-change: transform;
-  pointer-events: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 @media (max-width: 950px){
