@@ -13,13 +13,14 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export default function VintageMobile({ onClick }: { onClick?: () => void }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.4 });
   const sectionRef = useRef<HTMLDivElement>(null);
   const [screenWidth, setScreenWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 0
+    typeof window !== "undefined" ? window.innerWidth : 0,
   );
 
   const gridContainerVariants = {
@@ -118,24 +119,14 @@ export default function VintageMobile({ onClick }: { onClick?: () => void }) {
                 the go.
               </Label>
               <div className="w-full flex justify-between items-center">
-                <Dialog>
-                  <DialogTrigger>
-                    <Button>
-                      <PlayIcon></PlayIcon> DEMO
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="w-full h-[90%] p-2 bg-black/70">
-                    <DialogTitle className="hidden"></DialogTitle>
-                    <iframe
-                      className="w-full h-full rounded-2xl"
-                      src="https://www.youtube.com/embed/WAjTQF2T0xc?autoplay=1&loop=1&playlist=WAjTQF2T0xc&mute=1&controls=0&rel=0"
-                      title="Vintage Demo"
-                      frameBorder="0"
-                      allow="autoplay; encrypted-media"
-                      allowFullScreen
-                    ></iframe>
-                  </DialogContent>
-                </Dialog>
+                <Link
+                  target="_blank"
+                  href={"https://www.youtube.com/shorts/WAjTQF2T0xc"}
+                >
+                  <Button>
+                    <PlayIcon></PlayIcon> DEMO
+                  </Button>
+                </Link>
                 <div className="flex gap-2 w-full justify-end">
                   <Image
                     alt=""

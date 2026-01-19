@@ -14,6 +14,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export default function VintageAffiliate({
   onClick,
@@ -24,7 +25,7 @@ export default function VintageAffiliate({
   const isInView = useInView(ref, { amount: 0.4 });
   const sectionRef = useRef<HTMLDivElement>(null);
   const [screenWidth, setScreenWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 0
+    typeof window !== "undefined" ? window.innerWidth : 0,
   );
 
   const gridContainerVariants = {
@@ -126,26 +127,14 @@ export default function VintageAffiliate({
                 partner performance.
               </Label>
               <div className="w-full flex justify-between items-center">
-                <Dialog>
-                  <DialogTrigger>
-                    <Button>
-                      <PlayIcon></PlayIcon> DEMO
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[90%] h-[90%] p-2 bg-black/70">
-                    <DialogTitle className="hidden"></DialogTitle>
-                    <div className="flex h-full items-center justify-center">
-                      <iframe
-                        className="w-full h-full"
-                        src="https://www.youtube.com/embed/w7QSPf53hZM?autoplay=1&loop=1&playlist=w7QSPf53hZM&mute=1&controls=0&rel=0"
-                        title="Green Future Demo"
-                        frameBorder="0"
-                        allow="autoplay; encrypted-media"
-                        allowFullScreen
-                      ></iframe>
-                    </div>
-                  </DialogContent>
-                </Dialog>
+                <Link
+                  target="_blank"
+                  href={"https://www.youtube.com/watch?v=w7QSPf53hZM"}
+                >
+                  <Button>
+                    <PlayIcon></PlayIcon> DEMO
+                  </Button>
+                </Link>
                 <div className="flex gap-2 w-full justify-end">
                   <Image
                     alt=""

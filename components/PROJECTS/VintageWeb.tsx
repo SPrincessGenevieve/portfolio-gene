@@ -14,13 +14,14 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export default function VintageWeb({ onClick }: { onClick?: () => void }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.4 });
   const sectionRef = useRef<HTMLDivElement>(null);
   const [screenWidth, setScreenWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 0
+    typeof window !== "undefined" ? window.innerWidth : 0,
   );
 
   const gridContainerVariants = {
@@ -123,26 +124,14 @@ export default function VintageWeb({ onClick }: { onClick?: () => void }) {
                 portfolio data presentation.
               </Label>
               <div className="w-full flex justify-between items-center">
-                <Dialog>
-                  <DialogTrigger>
-                    <Button>
-                      <PlayIcon></PlayIcon> DEMO
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[90%] h-[90vh] p-2 bg-black/70">
-                    <DialogTitle className="hidden"></DialogTitle>
-                    <div className="relative w-auto h-full">
-                      <iframe
-                        className="w-full h-full"
-                        src="https://www.youtube.com/embed/12BPFET28rM?autoplay=1&loop=1&playlist=12BPFET28rM&mute=1&controls=0&rel=0"
-                        title="Vintage Demo"
-                        frameBorder="0"
-                        allow="autoplay; encrypted-media"
-                        allowFullScreen
-                      ></iframe>
-                    </div>
-                  </DialogContent>
-                </Dialog>
+                <Link
+                  target="_blank"
+                  href={"https://www.youtube.com/watch?v=12BPFET28rM"}
+                >
+                  <Button>
+                    <PlayIcon></PlayIcon> DEMO
+                  </Button>
+                </Link>
                 <div className="flex gap-2 w-full justify-end">
                   <Image
                     alt=""
