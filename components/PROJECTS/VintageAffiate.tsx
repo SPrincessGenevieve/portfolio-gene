@@ -105,13 +105,13 @@ export default function VintageAffiliate({
               <div>
                 <Label
                   variant="h2"
-                  className={`${screenWidth <= 1000 ? "text-[2.2vh]" : ""}`}
+                  className={`${screenWidth <= 1000 ? "text-[18px]" : ""}`}
                 >
                   VINTAGE AFFILIATE - WEB
                 </Label>
                 <Label
                   className={`uppercase ${
-                    screenWidth <= 1000 ? "text-[2vh]" : ""
+                    screenWidth <= 1000 ? "text-[16px]" : ""
                   }`}
                 >
                   Fronted Developer
@@ -119,7 +119,7 @@ export default function VintageAffiliate({
               </div>
               <Label
                 className={`uppercase  ${
-                  screenWidth <= 1000 ? "text-[1.4vh]" : ""
+                  screenWidth <= 1000 ? "text-[12px]" : ""
                 }`}
               >
                 Developed a responsive affiliate platform for a wine investment

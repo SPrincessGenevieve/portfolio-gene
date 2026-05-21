@@ -14,7 +14,7 @@ export default function AboutMe({ onClick }: { onClick: () => void }) {
   const isInView = useInView(ref, { amount: 0.4 });
   const sectionRef = useRef<HTMLDivElement>(null);
   const [screenWidth, setScreenWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 0
+    typeof window !== "undefined" ? window.innerWidth : 0,
   );
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export default function AboutMe({ onClick }: { onClick: () => void }) {
             >
               <Label
                 className={`font-thin ${
-                  screenWidth <= 1000 ? "text-[1.4vh]" : ""
+                  screenWidth <= 1000 ? "text-[12px]" : ""
                 } uppercase text-shadow-black [text-shadow:0px_0px_20px_rgba(0,0,0,1)]`}
               >
                 Full-stack developer with 2+ years of experience, primarily

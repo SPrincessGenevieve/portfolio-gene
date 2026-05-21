@@ -23,11 +23,11 @@ const defaultProps = {
 };
 
 const lilyImages = [
-  "/lily/lily-1.png",
-  "/lily/lily-1.png",
-  "/lily/lily3.png",
-  "/lily/lily-2.png",
-  "/lily/lily-2.png",
+  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335290/flower-lily-pad-2_r9expq.png",
+  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335289/lily-pad_nspzz4.png",
+  // "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335451/lily-1_u9pc80.png",
+  // "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335451/lily3_lcnm8m.png",
+  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335451/lily-2_ja6jxe.png",
 ];
 
 export default function Lilies({
@@ -66,7 +66,7 @@ export default function Lilies({
       while (
         newLilies.some(
           (lily) =>
-            Math.abs(lily.top - top) < 100 && Math.abs(lily.left - left) < 100
+            Math.abs(lily.top - top) < 100 && Math.abs(lily.left - left) < 100,
         ) &&
         attempts < 50
       ) {
@@ -98,7 +98,7 @@ export default function Lilies({
       while (
         newTiny.some(
           (lily) =>
-            Math.abs(lily.top - top) < 20 && Math.abs(lily.left - left) < 20
+            Math.abs(lily.top - top) < 20 && Math.abs(lily.left - left) < 20,
         ) &&
         attempts < 50
       ) {

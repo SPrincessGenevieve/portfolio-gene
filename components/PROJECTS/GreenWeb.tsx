@@ -94,13 +94,13 @@ export default function GreenWeb({ onClick }: { onClick?: () => void }) {
               <div>
                 <Label
                   variant="h2"
-                  className={`${screenWidth <= 1000 ? "text-[2.2vh]" : ""}`}
+                  className={`${screenWidth <= 1000 ? "text-[18px]" : ""}`}
                 >
                   GREEN FUTURE
                 </Label>
                 <Label
                   className={`uppercase ${
-                    screenWidth <= 1000 ? "text-[2vh]" : ""
+                    screenWidth <= 1000 ? "text-[16px]" : ""
                   }`}
                 >
                   Fronted Developer
@@ -108,7 +108,7 @@ export default function GreenWeb({ onClick }: { onClick?: () => void }) {
               </div>
               <Label
                 className={`uppercase  ${
-                  screenWidth <= 1000 ? "text-[1.4vh]" : ""
+                  screenWidth <= 1000 ? "text-[12px]" : ""
                 }`}
               >
                 Developed the admin interface for managing users and clients,

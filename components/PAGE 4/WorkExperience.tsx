@@ -6,7 +6,12 @@ import Title from "../Title";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Lilies from "../Lilies";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 import { Mouse } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 
@@ -32,7 +37,7 @@ export default function WorkExperience({ onClick }: { onClick: () => void }) {
   const isInView = useInView(ref, { amount: 0.4 });
   const sectionRef = useRef<HTMLDivElement>(null);
   const [screenWidth, setScreenWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 0
+    typeof window !== "undefined" ? window.innerWidth : 0,
   );
 
   const gridContainerVariants = {
@@ -93,12 +98,12 @@ export default function WorkExperience({ onClick }: { onClick: () => void }) {
               <div>
                 <Label variant="h2">{item.title}</Label>
                 <Label
-                  className={` ${screenWidth <= 1000 ? "text-[1.4vh]" : ""}`}
+                  className={` ${screenWidth <= 1000 ? "text-[12px]" : ""}`}
                 >
                   {item.role}
                 </Label>
                 <Label
-                  className={` ${screenWidth <= 1000 ? "text-[1.4vh]" : ""}`}
+                  className={` ${screenWidth <= 1000 ? "text-[12px]" : ""}`}
                 >
                   {item.date}
                 </Label>

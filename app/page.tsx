@@ -68,7 +68,11 @@ export default function Home() {
     >
       {/* Keep fish and orbs */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <GlowingOrbs />
+        <div className="absolute inset-0 w-full h-full z-100">
+          <GlowingOrbs />
+        </div>
+
+        <div className="absolute inset-0 bg-blue-800/40 w-full h-full z-99"></div>
         <SwimmingFish />
       </div>
 

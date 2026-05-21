@@ -5,16 +5,16 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex hover:shadow-blue-400/70 transition border border-transparent hover:border-blue-400 duration-200 ease-in-out hover:shadow-xl shadow-md text-[2vh]  items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none cursor-pointer disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex hover:shadow-blue-400/70 transition border border-transparent hover:border-blue-400 duration-200 ease-in-out hover:shadow-xl shadow-md text-[16px]  items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none cursor-pointer disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
         default:
-          "bg-[#32389A] text-white text-[2vh] font-mono hover:bg-[#0D1048] ",
+          "bg-[#32389A] text-white text-[16px] font-mono hover:bg-[#0D1048] ",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
-          "border-2 border-[#32389A] bg-transparent font-mono text-[2vh] text-white shadow-xs hover:bg-[#32389A] hover:text-white dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "border-2 border-[#32389A] bg-transparent font-mono text-[16px] text-white shadow-xs hover:bg-[#32389A] hover:text-white dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost:
@@ -34,7 +34,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 function Button({

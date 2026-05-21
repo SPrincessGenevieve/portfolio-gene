@@ -6,11 +6,11 @@ import { useSpring } from "@react-spring/web";
 import styles from "./FishSwimming.module.css";
 
 const fishGIFs = [
-  "/fishes/black-orange.gif",
-  "/fishes/black.gif",
-  "/fishes/orange-white.gif",
-  "/fishes/white-orange.gif",
-  "/fishes/white.gif",
+  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335276/black-orange_zjdsxz.gif",
+  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335274/black_nh6vqu.gif",
+  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335274/orange-white_nyxlcm.gif",
+  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335275/white-orange_yszc51.gif",
+  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335275/white_a4kt1e.gif",
 ];
 
 const directions = [
@@ -85,7 +85,7 @@ export default function SwimmingFish() {
   // Generate fish sizes and GIFs only once
   const fishData = useRef(
     directions.map((_, i) => ({
-      size: Math.floor(rand(170, 300)),
+      size: Math.floor(rand(130, 270)),
       gif: fishGIFs[i % fishGIFs.length],
     })),
   );
