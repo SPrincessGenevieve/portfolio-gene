@@ -23,13 +23,13 @@ const stack = [
 
 const shuffle = <T,>(arr: T[]) => [...arr].sort(() => Math.random() - 0.5);
 
-export default function TechStack({ onClick }: { onClick: () => void }) {
+export default function TechStack({ onClick }: { onClick?: () => void }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.4 });
   const sectionRef = useRef<HTMLDivElement>(null);
   const stackList = useMemo(() => shuffle(stack), []);
   const [screenWidth, setScreenWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 0
+    typeof window !== "undefined" ? window.innerWidth : 0,
   );
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
 
@@ -126,7 +126,7 @@ export default function TechStack({ onClick }: { onClick: () => void }) {
             }}
           >
             <Key key={`key-${label}`} label={label} />
-          </motion.div>
+          </motion.div>,
         );
         stackCounter++;
       } else {
@@ -167,7 +167,7 @@ export default function TechStack({ onClick }: { onClick: () => void }) {
             }}
           >
             <Dot key={`dot-${i}`} />
-          </motion.div>
+          </motion.div>,
         );
       }
     }
@@ -175,7 +175,7 @@ export default function TechStack({ onClick }: { onClick: () => void }) {
   };
 
   return (
-    <div className="flex flex-row flex-wrap-reverse items-center justify-evenly w-full h-full">
+    <div className="flex flex-row  flex-wrap-reverse items-center justify-evenly w-full h-full">
       <motion.section
         ref={sectionRef}
         className={`flex items-center ${
@@ -213,19 +213,19 @@ export default function TechStack({ onClick }: { onClick: () => void }) {
           transition={{ duration: 1, ease: "backInOut", delay: 0.2 }}
         >
           <Card
-            className={`bg-[#21267C]/70  z-80 w-full  ${
+            className={`bg-primary-blue-200/70  z-80 w-full  ${
               screenWidth < 410 ? "max-w-80" : "max-w-100"
             }`}
           >
             <CardContent>
               <Label>{`<h1>Tech Stack</h1>`}</Label>
-              <Card className="bg-[#040847]/80">
+              <Card className="bg-primary-blue-300/80">
                 <CardContent>
-                  <Label className="text-[#32389A]">{`<ul>`}</Label>
+                  <Label className="text-primary-blue-100">{`<ul>`}</Label>
                   <div className="pl-6 flex flex-col gap-1">
                     {stackList.map((item) => (
                       <div key={item.label} className="flex gap-2 items-center">
-                        <Label className="text-[#8A38F5]">{`<li>`}</Label>
+                        <Label className="text-primary-purple-100">{`<li>`}</Label>
                         <Label
                           className={`transition-colors ${
                             hoveredKey === item.label
@@ -235,27 +235,17 @@ export default function TechStack({ onClick }: { onClick: () => void }) {
                         >
                           {item.label}
                         </Label>
-                        <Label className="text-[#8A38F5]">{`</li>`}</Label>
+                        <Label className="text-primary-purple-100">{`</li>`}</Label>
                       </div>
                     ))}
                   </div>
-                  <Label className="text-[#32389A]">{`</ul>`}</Label>
+                  <Label className="text-primary-blue-100">{`</ul>`}</Label>
                 </CardContent>
               </Card>
             </CardContent>
           </Card>
         </motion.div>
       </motion.section>
-
-      {/* ================= MOUSE ================= */}
-      <div className="w-full z-80 absolute bottom-0 flex items-center justify-center">
-        <Mouse
-          onClick={onClick}
-          size={50}
-          strokeWidth={1}
-          className="text-white cursor-pointer hover:scale-[1.2] duration-300 transition ease-in-out absolute bottom-10"
-        />
-      </div>
 
       {/* ================= LILIES ================= */}
       <Lilies maxCount={8} minSize={250} maxSize={320}></Lilies>

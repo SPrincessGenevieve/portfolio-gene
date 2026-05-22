@@ -1,129 +1,217 @@
 "use client";
+
 import { useEffect, useRef, useState } from "react";
-import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import Intro from "@/components/PAGE 1/intro";
 import GlowingOrbs from "@/components/GlowingOrbs";
 import SwimmingFish from "@/components/SwimmingFish";
 import AboutMe from "@/components/PAGE 2/AboutMe";
 import TechStack from "@/components/PAGE 3/TechStack";
 import WorkExperience from "@/components/PAGE 4/WorkExperience";
-import { Label } from "@/components/ui/label";
-import VintageWeb from "@/components/PROJECTS/VintageWeb";
-import VintageMobile from "@/components/PROJECTS/VintageMobile";
-import VintageAdminWeb from "@/components/PROJECTS/VintageAdminWeb";
-import GreenWeb from "@/components/PROJECTS/GreenWeb";
 import Footer from "@/components/FOOTER/footer";
-import VintageAffiliate from "@/components/PROJECTS/VintageAffiate";
+import ProjectGallery from "@/components/PROJECT GALLERY/ProjectGallery";
+import { MouseIcon } from "lucide-react";
 
 export default function Home() {
   const ref = useRef<any>(null);
-  const [displayDarkness, setDisplayDarkness] = useState(0);
 
-  // Handle Ripple Init
+  // ✅ FIX: correct typing
+  const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+  const [activeSection, setActiveSection] = useState(0);
+  // Ripple
   useEffect(() => {
     let $: any;
     const loadRipples = async () => {
       const jquery = await import("jquery");
       await import("jquery.ripples");
       $ = jquery.default;
-      $(".bg-ripple").ripples({ resolution: 756, perturbance: 0.01 });
+
+      $(".bg-ripple").ripples({
+        resolution: 756,
+        perturbance: 0.01,
+      });
     };
     loadRipples();
   }, []);
 
-  // Update darkness based on parallax scroll
+  // Section observer
   useEffect(() => {
-    const container = ref.current?.container?.current;
-    if (!container) return;
+    const timeout = setTimeout(() => {
+      const sections = sectionRefs.current.filter(Boolean);
 
-    const handleScroll = () => {
-      const scrollOffset = ref.current.current || 0;
-      // Normalize offset (0 to 1) based on total pages
-      const targetDarkness = Math.min(scrollOffset / 3, 1);
-      setDisplayDarkness(targetDarkness);
-    };
+      const observers: IntersectionObserver[] = [];
 
-    container.addEventListener("scroll", handleScroll);
-    return () => container.removeEventListener("scroll", handleScroll);
+      sections.forEach((section, index) => {
+        if (!section) return; // ✅ IMPORTANT
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (entries[0].isIntersecting) {
+              setActiveSection(index);
+            }
+          },
+          { threshold: 0.6 },
+        );
+
+        observer.observe(section); // ✅ now safe
+      });
+
+      return () => {
+        observers.forEach((o) => o.disconnect());
+      };
+    }, 500); // 👈 IMPORTANT: wait for DOM
+
+    return () => clearTimeout(timeout);
   }, []);
 
-  const interpolateColor = (d: number) => {
-    const lerp = (a: number, b: number) => a + (b - a) * d;
-    const darkRGB = [4, 8, 71]; // dark blue
-    const lightRGB = [50, 56, 154]; // light blue
-    return `rgb(${Math.round(lerp(lightRGB[0], darkRGB[0]))}, 
-                ${Math.round(lerp(lightRGB[1], darkRGB[1]))}, 
-                ${Math.round(lerp(lightRGB[2], darkRGB[2]))})`;
-  };
+  // Background colors
+  const backgroundColors = [
+    "#32389a", // Intro
+    "#040847", // AboutMe
+    "#040847", // TechStack
+    "#040847", // WorkExperience
+    "#000000", // Projects
+    "#000000", // Footer
+  ];
 
   const backgroundStyle = {
-    backgroundColor: interpolateColor(displayDarkness),
-    transition: "background-color 0.5s ease-in-out", // smooth transition
+    backgroundColor: backgroundColors[activeSection],
+    transition: "background-color 0.6s ease-in-out",
   };
 
   return (
     <div
-      className="relative bg-ripple min-h-screen  w-full h-full font-sans"
+      className="relative bg-ripple min-h-screen overflow-hidden w-full font-sans"
       style={backgroundStyle}
     >
-      {/* Keep fish and orbs */}
+      {/* Background FX */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 w-full h-full z-100">
-          <GlowingOrbs />
-        </div>
-
-        <div className="absolute inset-0 bg-blue-800/40 w-full h-full z-99"></div>
+        <GlowingOrbs />
+        <div className="absolute inset-0 bg-blue-800/40" />
         <SwimmingFish />
       </div>
 
-      <Parallax pages={9.6} ref={ref}>
-        <ParallaxLayer
-          offset={0}
-          speed={1}
-          className="flex items-center justify-center bg-linear-to-t/srgb from-[#04084700] from-10% via-[#0408479d] via-50% to-[#04084700]"
+      {/* CONTENT */}
+      <div className="relative w-full z-10">
+        {/* Intro */}
+        <section
+          ref={(el) => {
+            if (el) {
+              sectionRefs.current[0] = el;
+            }
+          }}
+          className="min-h-screen relative flex items-center justify-center"
         >
           <Intro
-            contact={() => ref.current?.scrollTo(9)}
-            onClick={() => ref.current?.scrollTo(1)}
+            contact={() =>
+              window.scrollTo({
+                top: window.innerHeight * 6, // section index
+                behavior: "smooth",
+              })
+            }
+            onClick={() =>
+              window.scrollTo({
+                top: window.innerHeight * 1, // section index
+                behavior: "smooth",
+              })
+            }
           />
-        </ParallaxLayer>
+        </section>
 
-        <ParallaxLayer offset={1} speed={0.5}>
-          <AboutMe onClick={() => ref.current?.scrollTo(2)} />
-        </ParallaxLayer>
-        <ParallaxLayer offset={2} speed={0.5}>
-          <TechStack onClick={() => ref.current?.scrollTo(3)}></TechStack>
-        </ParallaxLayer>
-        <ParallaxLayer offset={3} speed={0.5}>
+        {/* About Me */}
+        <section
+          ref={(el) => {
+            if (el) {
+              sectionRefs.current[1] = el;
+            }
+          }}
+          className="min-h-screen relative flex items-center justify-center"
+        >
+          <AboutMe
+            onClick={() =>
+              window.scrollTo({
+                top: window.innerHeight * 2, // section index
+                behavior: "smooth",
+              })
+            }
+          />
+        </section>
+
+        {/* Tech Stack */}
+        <section
+          ref={(el) => {
+            if (el) {
+              sectionRefs.current[2] = el;
+            }
+          }}
+          className="min-h-screen relative flex flex-col items-center justify-center"
+        >
+          <TechStack />
+          {/* ================= MOUSE ================= */}
+          <div className="w-full h-40 flex items-center justify-center">
+            <MouseIcon
+              onClick={() =>
+                window.scrollTo({
+                  top: window.innerHeight * 3, // section index
+                  behavior: "smooth",
+                })
+              }
+              size={50}
+              strokeWidth={1}
+              className="text-white z-80 cursor-pointer hover:scale-[1.2] duration-300 transition ease-in-out absolute bottom-10"
+            />
+          </div>
+        </section>
+
+        {/* Work Experience */}
+        <section
+          ref={(el) => {
+            if (el) {
+              sectionRefs.current[3] = el;
+            }
+          }}
+          className="min-h-screen relative flex items-center justify-center"
+        >
           <WorkExperience
-            onClick={() => ref.current?.scrollTo(4)}
-          ></WorkExperience>
-        </ParallaxLayer>
-        <ParallaxLayer offset={4} speed={0.5}>
-          <VintageWeb onClick={() => ref.current?.scrollTo(5)}></VintageWeb>
-        </ParallaxLayer>
-        <ParallaxLayer offset={5} speed={0.5}>
-          <VintageMobile
-            onClick={() => ref.current?.scrollTo(6)}
-          ></VintageMobile>
-        </ParallaxLayer>
-        <ParallaxLayer offset={6} speed={0.5}>
-          <VintageAdminWeb
-            onClick={() => ref.current?.scrollTo(7)}
-          ></VintageAdminWeb>
-        </ParallaxLayer>
-        <ParallaxLayer offset={7} speed={0.5}>
-          <VintageAffiliate
-            onClick={() => ref.current?.scrollTo(8)}
-          ></VintageAffiliate>
-        </ParallaxLayer>
-        <ParallaxLayer offset={8} speed={0.5}>
-          <GreenWeb onClick={() => ref.current?.scrollTo(9)}></GreenWeb>
-        </ParallaxLayer>
-        <ParallaxLayer offset={9} speed={0.4} factor={1}>
-          <Footer></Footer>
-        </ParallaxLayer>
-      </Parallax>
+            onClick={() =>
+              window.scrollTo({
+                top: window.innerHeight * 4, // section index
+                behavior: "smooth",
+              })
+            }
+          />
+        </section>
+
+        {/* Projects */}
+        <section
+          ref={(el) => {
+            if (el) {
+              sectionRefs.current[4] = el;
+            }
+          }}
+          className="min-h-screen relative flex items-center justify-center"
+        >
+          <ProjectGallery
+            onClick={() =>
+              window.scrollTo({
+                top: window.innerHeight * 5, // section index
+                behavior: "smooth",
+              })
+            }
+          />
+        </section>
+
+        {/* Footer */}
+        <section
+          ref={(el) => {
+            if (el) {
+              sectionRefs.current[5] = el;
+            }
+          }}
+          className="min-h-screen relative flex items-center justify-center"
+        >
+          <Footer />
+        </section>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-"use state";
+"use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Label } from "../ui/label";
 import Title from "../Title";
@@ -28,14 +28,14 @@ export default function AboutMe({ onClick }: { onClick: () => void }) {
     <div className="w-full h-full flex items-center justify-center p-4">
       <motion.section
         ref={sectionRef}
+        viewport={{ once: true, amount: 0.5 }}
         className="flex flex-row-reverse gap-4 z-40 p-4 items-center justify-center cont-width"
       >
         <motion.div
           ref={ref}
           initial={{ opacity: 0, scale: 0.8, rotate: 30 }}
-          animate={
-            isInView ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0 }
-          }
+          whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
           transition={{
             rotate: {
               type: "spring",
@@ -66,22 +66,24 @@ export default function AboutMe({ onClick }: { onClick: () => void }) {
             <motion.div
               ref={ref}
               initial={{ opacity: 0, x: -100 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0 }}
+              whileInView={{ opacity: 1, x: 0 }}
               transition={{
                 opacity: { delay: 0.1 },
                 x: { delay: 0.1, duration: 0.5 },
               }}
+              viewport={{ once: true, amount: 0.5 }}
             >
               <Title text="ABOUT ME"></Title>
             </motion.div>
             <motion.div
               ref={ref}
               initial={{ opacity: 0, x: -100 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0 }}
+              whileInView={{ opacity: 1, x: 0 }}
               transition={{
                 opacity: { delay: 0.2 },
                 x: { delay: 0.2, duration: 0.5 },
               }}
+              viewport={{ once: true, amount: 0.5 }}
             >
               <Label
                 className={`font-thin ${
@@ -99,11 +101,12 @@ export default function AboutMe({ onClick }: { onClick: () => void }) {
           <motion.div
             ref={ref}
             initial={{ opacity: 0, x: -100 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{
               opacity: { delay: 0.3 },
               x: { delay: 0.3, duration: 0.5 },
             }}
+            viewport={{ once: true, amount: 0.5 }}
           >
             <Link target="_blank" href={"/CV.pdf"}>
               <Button className=" z-90">DOWNLOAD CV</Button>

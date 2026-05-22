@@ -17,11 +17,11 @@ import { motion, useInView } from "framer-motion";
 
 const experience = [
   {
-    logo: "/wela.png",
-    title: "WELA ONLINE CORP.",
-    role: "WEB DEVELOPER",
-    desc: "I work as a Web Developer at Wela Online Corp, primarily responsible for updating, customizing, and maintaining the company’s websites to ensure they remain functional, user-friendly, and aligned with business needs. My role includes implementing feature enhancements, fixing bugs, optimizing performance, and integrating backend data, while collaborating with designers and stakeholders to deliver consistent and reliable web solutions.",
-    date: "FEB 2024 - OCT 2024",
+    logo: "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779428434/code-tag_guuw3b.svg",
+    title: "FREELANCE",
+    role: "FULLSTACK DEVELOPER",
+    desc: "As a Fullstack Freelance Developer, I develop and deliver end-to-end web solutions, from UI/UX implementation to backend integration. I focus on building responsive, scalable, and maintainable applications, turning client requirements into polished digital products with strong attention to performance, usability, and detail.",
+    date: "FEB 2026 - PRESENT",
   },
   {
     logo: "/vintage.png",
@@ -29,6 +29,13 @@ const experience = [
     role: "FRONTEND DEVELOPER",
     desc: "I worked as a Frontend Developer at Vintage Associates, where I developed both mobile and web interfaces for their Wine Investment app, including the Admin frontend. My role involved translating design mockups into responsive, interactive layouts, ensuring seamless user experiences across devices, and writing clean, maintainable code to support both customer-facing and administrative features.",
     date: "DEC 2024 - JAN 2026",
+  },
+  {
+    logo: "/wela.png",
+    title: "WELA ONLINE CORP.",
+    role: "WEB DEVELOPER",
+    desc: "I work as a Web Developer at Wela Online Corp, primarily responsible for updating, customizing, and maintaining the company’s websites to ensure they remain functional, user-friendly, and aligned with business needs. My role includes implementing feature enhancements, fixing bugs, optimizing performance, and integrating backend data, while collaborating with designers and stakeholders to deliver consistent and reliable web solutions.",
+    date: "FEB 2024 - OCT 2024",
   },
 ];
 
@@ -62,8 +69,14 @@ export default function WorkExperience({ onClick }: { onClick: () => void }) {
   return (
     <div className="w-full h-full">
       <motion.section
+        viewport={{ once: true, amount: 0.5 }}
         ref={sectionRef}
-        variants={gridContainerVariants}
+        whileInView={{
+          opacity: 1,
+          transition: {
+            staggerChildren: 0.25,
+          },
+        }}
         initial="hidden"
         animate={isInView ? "show" : "hidden"} // <-- controlled by isInView
         className={`w-full h-full flex-col overflow-x-hidden flex justify-center ${
@@ -92,7 +105,7 @@ export default function WorkExperience({ onClick }: { onClick: () => void }) {
                   alt=""
                   width={400}
                   height={400}
-                  className="w-20 h-20"
+                  className="w-20 h-20 bg-white rounded-2xl"
                 ></Image>
               </div>
               <div>

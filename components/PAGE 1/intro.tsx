@@ -106,7 +106,10 @@ export default function Intro({
             transition={{ duration: 1, ease: "backInOut", delay: 0.4 }}
             className="mt-20 z-30"
           >
-            <Button onClick={contact} className="">
+            <Button
+              onClick={contact}
+              className="bg-white text-primary-blue-300 hover:text-white"
+            >
               CONTACT ME
             </Button>
           </motion.div>

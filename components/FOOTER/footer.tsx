@@ -34,27 +34,11 @@ const contact = [
 
 export default function Footer() {
   const [screenWidth, setScreenWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 0
+    typeof window !== "undefined" ? window.innerWidth : 0,
   );
   const [copied, setCopied] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.4 });
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  const gridContainerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.25,
-      },
-    },
-  };
-
-  const gridSquareVariants = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, x: 0 },
-  };
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
@@ -116,15 +100,17 @@ export default function Footer() {
   };
 
   return (
-    <div className="w-full h-full flex items-start justify-center">
-      <motion.section
-        ref={sectionRef}
-        variants={gridContainerVariants}
-        className="rect w-full h-full z-80 flex justify-center"
-      >
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      // viewport={{ once: true }}
+      transition={{ type: "spring", bounce: 0.3, stiffness: 70, delay: 0.2 }}
+      className="w-full flex min-h-screen  items-center justify-center overflow-hidden "
+    >
+      <section ref={sectionRef} className="w-full z-80 flex justify-center ">
         {screenWidth <= 890 ? (
           // ================= MOBILE =================
-          <div className="w-full h-full p-4 flex flex-col gap-4">
+          <div className="w-full  p-4 flex flex-col gap-4">
             <Label variant="h2">{`<h1>GET IN TOUCH</h1>`}</Label>
             {contact.map((item) => (
               <ContactItem key={item.label} item={item} />
@@ -137,30 +123,17 @@ export default function Footer() {
               screenWidth <= 1090 ? "w-full" : "w-[70%]"
             } gap-8`}
           >
-            <motion.div
-              ref={ref}
-              initial={{ opacity: 0, x: -100 }}
-              variants={gridSquareVariants}
-              animate={isInView ? "show" : "hidden"}
-            >
+            <div ref={ref}>
               <Title text="GET IN TOUCH" />
-            </motion.div>
+            </div>
             <div className="flex gap-4 w-full items-center justify-center">
               {contact.map((item, index) => (
-                <motion.div
-                  key={index}
-                  ref={ref}
-                  initial={{ opacity: 0, x: 100 }}
-                  variants={gridSquareVariants}
-                  animate={isInView ? "show" : "hidden"}
-                  className="w-full"
-                  transition={{ delay: 0.1 * (index + 1) }}
-                >
+                <div key={index} ref={ref} className="w-full">
                   <Card
                     key={item.label}
-                    className="w-[90%] hover:bg-[#040847]/70 transition ease-in-out h-full flex items-center justify-center"
+                    className="w-[90%] hover:bg-[#040847]/70 border-0 shadow-blue-50/12 shadow-[0_0_20px_10px]  transition backdrop-blur-sm bg-transparent ease-in-out flex items-center justify-center"
                   >
-                    <CardContent className="bg-transparent flex flex-col gap-4 items-center justify-center">
+                    <CardContent className="bg-transparent  flex flex-col gap-4 items-center justify-center">
                       <div className="w-full h-[30%] flex justify-center">
                         <Image
                           src={item.icon}
@@ -193,14 +166,14 @@ export default function Footer() {
                       )}
                     </CardContent>
                   </Card>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
         )}
-      </motion.section>
+      </section>
 
       <Lilies maxCount={8} minSize={250} maxSize={320} />
-    </div>
+    </motion.div>
   );
 }

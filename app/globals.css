@@ -43,6 +43,10 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+  --color-primary-blue-100: var(--primary-blue-100);
+  --color-primary-blue-200: var(--primary-blue-200);
+  --color-primary-blue-300: var(--primary-blue-300);
+  --color-primary-purple-100: var(--primary-purple-100);
 }
 
 :root {
@@ -78,6 +82,10 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --primary-blue-100: oklch(40.013% 0.15712 274.142);
+  --primary-blue-200: oklch(32.805% 0.14274 272.89);
+  --primary-blue-300: oklch(19.778% 0.11254 267.418);
+  --primary-purple-100: oklch(56.093% 0.2575 296.705);
 }
 
 .dark {
@@ -112,6 +120,10 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --primary-blue-100: oklch(40.013% 0.15712 274.142);
+  --primary-blue-200: oklch(32.805% 0.14274 272.89);
+  --primary-blue-300: oklch(19.778% 0.11254 267.418);
+  --primary-purple-100: oklch(56.093% 0.2575 296.705);
 }
 
 @layer base {
@@ -171,13 +183,7 @@
   }
 }
 
-.rect {
-  background: rgba(50, 56, 154, 0.24);
-  backdrop-filter: blur(16.35px);
-  border-radius: 25px;
-}
-
-.blur {
+Contact.blur {
   background: rgba(4, 8, 71, 0.2);
   backdrop-filter: blur(16.35px);
   border-radius: 25px;
