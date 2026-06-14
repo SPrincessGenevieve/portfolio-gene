@@ -5,12 +5,12 @@ import { useEffect, useRef, useState } from "react";
 import { useSpring } from "@react-spring/web";
 import styles from "./FishSwimming.module.css";
 
-const fishGIFs = [
-  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335276/black-orange_zjdsxz.gif",
-  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335274/black_nh6vqu.gif",
-  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335274/orange-white_nyxlcm.gif",
-  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335275/white-orange_yszc51.gif",
-  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335275/white_a4kt1e.gif",
+const fishGIFs = [""
+  // "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335276/black-orange_zjdsxz.gif",
+  // "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335274/black_nh6vqu.gif",
+  // "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335274/orange-white_nyxlcm.gif",
+  // "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335275/white-orange_yszc51.gif",
+  // "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335275/white_a4kt1e.gif",
 ];
 
 const directions = [
