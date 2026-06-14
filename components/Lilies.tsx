@@ -23,11 +23,10 @@ const defaultProps = {
 };
 
 const lilyImages = [
-  ""
-  // "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335290/flower-lily-pad-2_r9expq.png",
-  // "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335289/lily-pad_nspzz4.png",
-  // "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335451/lily-1_u9pc80.png",
-  // "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335451/lily-2_ja6jxe.png",
+  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335290/flower-lily-pad-2_r9expq.png",
+  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335289/lily-pad_nspzz4.png",
+  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335451/lily-1_u9pc80.png",
+  "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335451/lily-2_ja6jxe.png",
 ];
 
 export default function Lilies({
@@ -107,7 +106,12 @@ export default function Lilies({
         attempts++;
       }
 
-      newTiny.push({ src: "/lily.png", top, left, size: `${size}px` });
+      newTiny.push({
+        src: "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779335451/lily_j68zwb.png",
+        top,
+        left,
+        size: `${size}px`,
+      });
     }
 
     setTinyLilies(newTiny);

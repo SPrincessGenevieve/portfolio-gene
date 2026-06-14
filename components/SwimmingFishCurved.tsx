@@ -13,7 +13,7 @@ const fishGIFs = [
 
 const rand = (min: number, max: number) => Math.random() * (max - min) + min;
 
-export default function SwimmingFish() {
+export default function SwimmingFishCurved() {
   const fishRefs = useRef<HTMLDivElement[]>([]);
   const progress = useRef<number[]>(Array(fishGIFs.length).fill(0));
 
@@ -21,7 +21,7 @@ export default function SwimmingFish() {
     useSpring(() => ({
       speed: 1,
       config: { tension: 170, friction: 26, mass: 1.2 },
-    }))
+    })),
   );
 
   useEffect(() => {
