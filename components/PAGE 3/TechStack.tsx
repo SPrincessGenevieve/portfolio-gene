@@ -93,6 +93,7 @@ export default function TechStack({ onClick }: { onClick?: () => void }) {
         const label = stackList[stackCounter].label;
         row.push(
           <motion.div
+            key={`key-${label}`}
             ref={ref}
             initial={{
               opacity: 0,
@@ -125,7 +126,7 @@ export default function TechStack({ onClick }: { onClick?: () => void }) {
               },
             }}
           >
-            <Key key={`key-${label}`} label={label} />
+            <Key label={label} />
           </motion.div>,
         );
         stackCounter++;
@@ -133,6 +134,7 @@ export default function TechStack({ onClick }: { onClick?: () => void }) {
         // Odd index → Dot
         row.push(
           <motion.div
+            key={`dot-${i}`}
             ref={ref}
             initial={{
               opacity: 0,
@@ -166,7 +168,7 @@ export default function TechStack({ onClick }: { onClick?: () => void }) {
               },
             }}
           >
-            <Dot key={`dot-${i}`} />
+            <Dot />
           </motion.div>,
         );
       }

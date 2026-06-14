@@ -124,10 +124,7 @@ export default function VintageWeb({ onClick }: { onClick?: () => void }) {
                 portfolio data presentation.
               </Label>
               <div className="w-full flex justify-between items-center">
-                <Link
-                  target="_blank"
-                  href={"https://www.youtube.com/watch?v=12BPFET28rM"}
-                >
+                <Link target="_blank" href={"https://youtu.be/c6aMji51xm0"}>
                   <Button>
                     <PlayIcon></PlayIcon> DEMO
                   </Button>

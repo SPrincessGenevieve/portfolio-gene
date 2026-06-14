@@ -21,7 +21,7 @@ const experience = [
     title: "FREELANCE",
     role: "FULLSTACK DEVELOPER",
     desc: "As a Fullstack Freelance Developer, I develop and deliver end-to-end web solutions, from UI/UX implementation to backend integration. I focus on building responsive, scalable, and maintainable applications, turning client requirements into polished digital products with strong attention to performance, usability, and detail.",
-    date: "FEB 2026 - PRESENT",
+    date: "FEB 2026 - APR 2026",
   },
   {
     logo: "/vintage.png",
@@ -69,21 +69,23 @@ export default function WorkExperience({ onClick }: { onClick: () => void }) {
   return (
     <div className="w-full h-full">
       <motion.section
-        viewport={{ once: true, amount: 0.5 }}
         ref={sectionRef}
-        whileInView={{
-          opacity: 1,
-          transition: {
-            staggerChildren: 0.25,
-          },
-        }}
-        initial="hidden"
-        animate={isInView ? "show" : "hidden"} // <-- controlled by isInView
         className={`w-full h-full flex-col overflow-x-hidden flex justify-center ${
-          screenWidth <= 900 ? "gap-2 p-8" : "gap-12 p-25"
+          screenWidth <= 900 ? "gap-2 p-4" : "gap-12 p-25"
         }`}
       >
-        <motion.div ref={ref} variants={gridSquareVariants} className="z-90">
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: -100,
+          }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ type: "spring", stiffness: 80, bounce: 0.5 }}
+          viewport={{ once: true, amount: 0.5 }}
+          ref={ref}
+          variants={gridSquareVariants}
+          className="z-90"
+        >
           <Label
             variant="h1"
             className={`${
@@ -91,62 +93,104 @@ export default function WorkExperience({ onClick }: { onClick: () => void }) {
             } z-80 text-shadow-black [text-shadow:2px_5px_10px_rgba(0,0,0,0.5)] font-mono`}
           >{`<h1>WORK EXPERIENCE</h1>`}</Label>
         </motion.div>
-        <motion.div
-          className={`flex gap-4 z-80 ${screenWidth <= 770 ? "flex-col" : ""}`}
-        >
+        <motion.div className={`flex flex-col items-center z-80  w-full`}>
           {experience.map((item, index) => (
-            <motion.div
-              variants={gridSquareVariants}
-              className={`flex gap-8 bg-gradient-to-r shadow-black shadow-md from-[#0d1048a2] via-[#4950ddbd] to-[#32379aab] p-4 rounded-2xl w-full max-w-120 items-center`}
-            >
-              <div>
-                <Image
-                  src={item.logo}
-                  alt=""
-                  width={400}
-                  height={400}
-                  className="w-20 h-20 bg-white rounded-2xl"
-                ></Image>
-              </div>
-              <div>
-                <Label variant="h2">{item.title}</Label>
-                <Label
-                  className={` ${screenWidth <= 1000 ? "text-[12px]" : ""}`}
+            <div className="flex gap-2 h-100  w-full" key={index}>
+              {/* left */}
+              <div className="pb-4 w-full  flex flex-col items-end gap-2">
+                <div className="flex flex-col  items-end gap-1 bg-primary-blue-300/10 backdrop-blur-xl rounded-2xl p-2 px-4">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 70,
+                      bounce: 0.5,
+                    }}
+                  >
+                    <Label className="text-shadow-black text-right">
+                      {item.title}
+                    </Label>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 70,
+                      bounce: 0.5,
+                    }}
+                  >
+                    <Label className={`text-sm font-light  text-right`}>
+                      {item.role}
+                    </Label>
+                  </motion.div>
+                </div>
+                <motion.div
+                  className="relative w-20 h-20 mb-20"
+                  initial={{ opacity: 0, y: 20 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 70,
+                    bounce: 0.5,
+                  }}
                 >
-                  {item.role}
-                </Label>
+                  <Image
+                    src={item.logo}
+                    alt=""
+                    fill
+                    className="  bg-white rounded-2xl"
+                  ></Image>
+                </motion.div>
+              </div>
+              {/* middle */}
+              <motion.div className="relative  min-w-10  flex flex-col items-center ">
+                <div className="w-2 h-2 rounded-full bg-white"></div>
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  whileInView={{ opacity: 1, height: "100%" }}
+                  transition={{
+                    type: "spring",
+                    stiffness: index === 0 ? 70 : index === 1 ? 50 : 30,
+                    bounce: 0.5,
+                  }}
+                  className={`w-0.5 absolute bg-white ${index === 2 ? "" : "h-full"} rounded-2xl`}
+                ></motion.div>
+              </motion.div>
+              {/* right */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                viewport={{ once: true, amount: 0.5 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  type: "spring",
+                  stiffness: index === 0 ? 70 : index === 1 ? 50 : 30,
+                  bounce: 0.5,
+                }}
+                className="flex w-full items-start"
+              >
                 <Label
-                  className={` ${screenWidth <= 1000 ? "text-[12px]" : ""}`}
+                  className={`text-sm font-light bg-primary-blue-300/10 backdrop-blur-xl`}
                 >
                   {item.date}
                 </Label>
-                <Dialog>
-                  <DialogTrigger>
-                    <Button
-                      variant={"outline"}
-                      className="mt-4 border-white/30"
-                    >
-                      LEARN MORE
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogTitle className="hidden"></DialogTitle>
-                    <Label>{item.title}</Label>
-                    <Label>{item.desc}</Label>
-                  </DialogContent>
-                </Dialog>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           ))}
         </motion.div>
         <Lilies maxCount={8} minSize={250} maxSize={320}></Lilies>
       </motion.section>
-      <div className="w-full z-80 absolute bottom-0 flex items-center justify-center">
+      <div className="w-full flex items-center justify-center">
         <Mouse
           onClick={onClick}
           size={50}
           strokeWidth={1}
-          className="text-white cursor-pointer hover:scale-[1.2] duration-300 transition ease-in-out absolute bottom-10"
+          className="text-white cursor-pointer hover:scale-[1.2] duration-300 transition ease-in-out "
         />
       </div>
     </div>

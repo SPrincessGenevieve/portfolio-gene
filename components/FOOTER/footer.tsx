@@ -65,7 +65,7 @@ export default function Footer() {
             alt=""
             width={48}
             height={48}
-            className="w-12 h-12 object-contain flex-shrink-0"
+            className="w-12 h-12 object-contain shrink-0"
           />
           <div className="flex flex-col">
             <Label variant="h2">{item.label}</Label>
@@ -126,12 +126,12 @@ export default function Footer() {
             <div ref={ref}>
               <Title text="GET IN TOUCH" />
             </div>
-            <div className="flex gap-4 w-full items-center justify-center">
+            <div className="flex flex-wrap gap-4 w-full items-center justify-center">
               {contact.map((item, index) => (
-                <div key={index} ref={ref} className="w-full">
+                <div key={index} ref={ref} className="">
                   <Card
                     key={item.label}
-                    className="w-[90%] hover:bg-[#040847]/70 border-0 shadow-blue-50/12 shadow-[0_0_20px_10px]  transition backdrop-blur-sm bg-transparent ease-in-out flex items-center justify-center"
+                    className="w-full min-w-75 hover:bg-[#040847]/70 border-0 shadow-blue-50/12 shadow-[0_0_20px_10px]  transition backdrop-blur-sm bg-transparent ease-in-out flex items-center justify-center"
                   >
                     <CardContent className="bg-transparent  flex flex-col gap-4 items-center justify-center">
                       <div className="w-full h-[30%] flex justify-center">
@@ -140,7 +140,7 @@ export default function Footer() {
                           alt=""
                           width={48}
                           height={48}
-                          className="w-12 h-12 object-contain flex-shrink-0"
+                          className="w-12 h-12 object-contain shrink-0"
                         />
                       </div>
 

@@ -11,7 +11,6 @@ import { motion, useInView } from "framer-motion";
 
 export default function AboutMe({ onClick }: { onClick: () => void }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.4 });
   const sectionRef = useRef<HTMLDivElement>(null);
   const [screenWidth, setScreenWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0,
@@ -53,7 +52,9 @@ export default function AboutMe({ onClick }: { onClick: () => void }) {
           }}
         >
           <Image
-            src={"/me.png"}
+            src={
+              "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779456528/me_kjagis.png"
+            }
             width={400}
             height={400}
             alt=""
@@ -108,8 +109,10 @@ export default function AboutMe({ onClick }: { onClick: () => void }) {
             }}
             viewport={{ once: true, amount: 0.5 }}
           >
-            <Link target="_blank" href={"/CV.pdf"}>
-              <Button className=" z-90">DOWNLOAD CV</Button>
+            <Link target="_blank" href={"/RESUME.pdf"}>
+              <Button className="bg-white text-primary-blue-300 hover:text-white">
+                DOWNLOAD RESUME
+              </Button>
             </Link>
           </motion.div>
         </div>
