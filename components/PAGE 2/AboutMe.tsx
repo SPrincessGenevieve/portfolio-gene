@@ -109,7 +109,7 @@ export default function AboutMe({ onClick }: { onClick: () => void }) {
             }}
             viewport={{ once: true, amount: 0.5 }}
           >
-            <Link target="_blank" href={"/RESUME.pdf"}>
+            <Link target="_blank" href={"/RESUME-1.pdf"}>
               <Button className="bg-white text-primary-blue-300 hover:text-white">
                 DOWNLOAD RESUME
               </Button>
