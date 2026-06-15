@@ -87,7 +87,7 @@ export default function Home() {
       <div className="fixed inset-0 z-0 pointer-events-none">
         <GlowingOrbs />
         <div className="absolute inset-0 bg-blue-800/40" />
-        <SwimmingFish />
+        {/* <SwimmingFish /> */}
       </div>
 
       {/* CONTENT */}
