@@ -125,7 +125,7 @@ export default function Home() {
           <AboutMe
             onClick={() =>
               window.scrollTo({
-                top: window.innerHeight * 2, // section index
+                top: window.innerHeight * 2.5, // section index
                 behavior: "smooth",
               })
             }
@@ -143,7 +143,7 @@ export default function Home() {
         >
           <TechStack />
           {/* ================= MOUSE ================= */}
-          <ScrollIndicator target={3.5}></ScrollIndicator>
+          <ScrollIndicator target={4.5}></ScrollIndicator>
         </section>
 
         {/* Work Experience */}
@@ -158,7 +158,7 @@ export default function Home() {
           <WorkExperience
             onClick={() =>
               window.scrollTo({
-                top: window.innerHeight * 4, // section index
+                top: window.innerHeight * 7, // section index
                 behavior: "smooth",
               })
             }

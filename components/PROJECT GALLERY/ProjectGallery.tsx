@@ -482,7 +482,7 @@ export default function ProjectGallery() {
         </div>
       </div>
 
-      <ScrollIndicator target={8} />
+      <ScrollIndicator target={16.5} />
     </section>
   );
 }
