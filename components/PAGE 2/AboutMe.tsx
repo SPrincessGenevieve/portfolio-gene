@@ -184,11 +184,27 @@ export default function AboutMe({ onClick }: { onClick: () => void }) {
               className="group h-12 rounded-xl border border-blue-300/20 bg-[#0C1D74] px-6 text-sm font-medium tracking-wide text-white shadow-[0_8px_30px_rgba(12,29,116,0.3)] transition-all duration-300 hover:bg-[#1735A0] hover:shadow-[0_8px_35px_rgba(12,29,116,0.5)]"
             >
               <Link
-                href="/RESUME-1.pdf"
+                href="/Princess_Genevieve_Sagrado_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 DOWNLOAD RESUME
+                <ArrowUpRight
+                  size={17}
+                  className="ml-2 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              className="group h-12 rounded-xl border border-blue-300/20 bg-[#0C1D74] px-6 text-sm font-medium tracking-wide text-white shadow-[0_8px_30px_rgba(12,29,116,0.3)] transition-all duration-300 hover:bg-[#1735A0] hover:shadow-[0_8px_35px_rgba(12,29,116,0.5)]"
+            >
+              <Link
+                href="/Princess_Genevieve_Sagrado_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                DOWNLOAD CV
                 <ArrowUpRight
                   size={17}
                   className="ml-2 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
