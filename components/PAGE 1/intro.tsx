@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { Mouse } from "lucide-react";
 import Lilies from "../Lilies";
 import { motion } from "framer-motion";
+import ScrollIndicator from "../ScrollIndicator";
 
 export default function Intro({
   onClick,
@@ -114,19 +115,7 @@ export default function Intro({
             </Button>
           </motion.div>
 
-          <motion.div
-            className="w-full absolute flex items-center justify-center bottom-0"
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "backInOut", delay: 0.5 }}
-          >
-            <Mouse
-              onClick={onClick}
-              size={50}
-              strokeWidth={1}
-              className="text-white cursor-pointer hover:scale-[1.2] duration-300 transition ease-in-out absolute bottom-10"
-            />
-          </motion.div>
+          <ScrollIndicator target={1}></ScrollIndicator>
         </div>
         <Lilies maxCount={8} minSize={250} maxSize={320} />
       </motion.section>

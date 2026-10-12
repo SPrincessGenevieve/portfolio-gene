@@ -15,8 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${kodoMono.variable} antialiased`}>{children}</body>
-      <GoogleAnalytics gaId="G-7JC10G4KL0"></GoogleAnalytics>
+      <body className={`${kodoMono.variable} antialiased`}>
+        {children} <GoogleAnalytics gaId="G-7JC10G4KL0"></GoogleAnalytics>
+      </body>
     </html>
   );
 }

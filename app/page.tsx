@@ -9,70 +9,66 @@ import TechStack from "@/components/PAGE 3/TechStack";
 import WorkExperience from "@/components/PAGE 4/WorkExperience";
 import Footer from "@/components/FOOTER/footer";
 import ProjectGallery from "@/components/PROJECT GALLERY/ProjectGallery";
-import { MouseIcon } from "lucide-react";
+import ScrollIndicator from "@/components/ScrollIndicator";
 
 export default function Home() {
-  const ref = useRef<any>(null);
-
   // ✅ FIX: correct typing
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
   const [activeSection, setActiveSection] = useState(0);
-  // Ripple
-  useEffect(() => {
-    let $: any;
-    const loadRipples = async () => {
-      const jquery = await import("jquery");
-      await import("jquery.ripples");
-      $ = jquery.default;
-
-      $(".bg-ripple").ripples({
-        resolution: 756,
-        perturbance: 0.01,
-      });
-    };
-    loadRipples();
-  }, []);
 
   // Section observer
+
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      const sections = sectionRefs.current.filter(Boolean);
+    const updateActiveSection = () => {
+      const viewportCenter = window.innerHeight / 2;
+      let closestIndex = 0;
+      let closestDistance = Infinity;
 
-      const observers: IntersectionObserver[] = [];
+      sectionRefs.current.forEach((section, index) => {
+        if (!section) return;
 
-      sections.forEach((section, index) => {
-        if (!section) return; // ✅ IMPORTANT
+        const rect = section.getBoundingClientRect();
 
-        const observer = new IntersectionObserver(
-          (entries) => {
-            if (entries[0].isIntersecting) {
-              setActiveSection(index);
-            }
-          },
-          { threshold: 0.6 },
-        );
+        // Distance between the viewport center and this section
+        let distance = 0;
 
-        observer.observe(section); // ✅ now safe
+        if (viewportCenter < rect.top) {
+          distance = rect.top - viewportCenter;
+        } else if (viewportCenter > rect.bottom) {
+          distance = viewportCenter - rect.bottom;
+        }
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
       });
 
-      return () => {
-        observers.forEach((o) => o.disconnect());
-      };
-    }, 500); // 👈 IMPORTANT: wait for DOM
+      setActiveSection(closestIndex);
+    };
 
-    return () => clearTimeout(timeout);
+    updateActiveSection();
+
+    window.addEventListener("scroll", updateActiveSection, {
+      passive: true,
+    });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, []);
 
   // Background colors
   const backgroundColors = [
-    "#32389a", // Intro
-    "#040847", // AboutMe
-    "#040847", // TechStack
-    "#040847", // WorkExperience
-    "#000000", // Projects
-    "#000000", // Footer
+    "#32389A", // Intro — vibrant indigo blue
+    "#173882", // About Me — deep blue
+    "#10165C", // Tech Stack — midnight blue
+    "#0B1045", // Work Experience — dark navy
+    "#081244", // Projects — deep navy
+    "#080C25", // Footer — near black
   ];
-
   const backgroundStyle = {
     backgroundColor: backgroundColors[activeSection],
     transition: "background-color 0.6s ease-in-out",
@@ -80,13 +76,13 @@ export default function Home() {
 
   return (
     <div
-      className="relative bg-ripple min-h-screen overflow-hidden w-full font-sans"
+      className="relative  min-h-screen overflow-hidden w-full font-sans"
       style={backgroundStyle}
     >
       {/* Background FX */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      <div className="pointer-events-none fixed inset-0 z-0">
         <GlowingOrbs />
-        <div className="absolute inset-0 bg-blue-800/40" />
+        <div className="absolute inset-0" />
         {/* <SwimmingFish /> */}
       </div>
 
@@ -147,19 +143,7 @@ export default function Home() {
         >
           <TechStack />
           {/* ================= MOUSE ================= */}
-          <div className="w-full h-40 flex items-center justify-center">
-            <MouseIcon
-              onClick={() =>
-                window.scrollTo({
-                  top: window.innerHeight * 3, // section index
-                  behavior: "smooth",
-                })
-              }
-              size={50}
-              strokeWidth={1}
-              className="text-white z-80 cursor-pointer hover:scale-[1.2] duration-300 transition ease-in-out absolute bottom-10"
-            />
-          </div>
+          <ScrollIndicator target={3.5}></ScrollIndicator>
         </section>
 
         {/* Work Experience */}
@@ -190,14 +174,7 @@ export default function Home() {
           }}
           className="min-h-screen relative flex items-center justify-center"
         >
-          <ProjectGallery
-            onClick={() =>
-              window.scrollTo({
-                top: window.innerHeight * 5, // section index
-                behavior: "smooth",
-              })
-            }
-          />
+          <ProjectGallery />
         </section>
 
         {/* Footer */}

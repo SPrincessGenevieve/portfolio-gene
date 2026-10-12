@@ -1,132 +1,230 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { Label } from "../ui/label";
-import Title from "../Title";
+
+import React from "react";
 import Image from "next/image";
-import { Button } from "../ui/button";
-import Lilies from "../Lilies";
-import { Mouse } from "lucide-react";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDown, ArrowUpRight, Code2, Mouse } from "lucide-react";
+
+import Title from "../Title";
+import Lilies from "../Lilies";
+import { Button } from "../ui/button";
 
 export default function AboutMe({ onClick }: { onClick: () => void }) {
-  const ref = useRef(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [screenWidth, setScreenWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 0,
-  );
+  const reduceMotion = useReducedMotion();
 
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const reveal = (delay = 0) => ({
+    initial: reduceMotion ? false : { opacity: 0, y: 24 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.25 },
+    transition: {
+      duration: reduceMotion ? 0 : 0.7,
+      delay: reduceMotion ? 0 : delay,
+      ease: "easeOut" as const,
+    },
+  });
 
   return (
-    <div className="w-full h-full flex items-center justify-center p-4">
-      <motion.section
-        ref={sectionRef}
-        viewport={{ once: true, amount: 0.5 }}
-        className="flex flex-row-reverse gap-4 z-40 p-4 items-center justify-center cont-width"
-      >
+    <section className="relative isolate flex min-h-screen w-full items-center justify-center overflow-hidden  px-5 py-24 text-white sm:px-8 md:px-12 lg:px-16">
+      {/* Ambient background lighting */}
+
+      {/* Subtle technical grid */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.08]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(148, 163, 184, 0.2) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(148, 163, 184, 0.2) 1px, transparent 1px)
+          `,
+          backgroundSize: "64px 64px",
+          maskImage: "linear-gradient(to bottom, black, transparent 90%)",
+        }}
+      />
+
+      {/* Lily decoration */}
+      <div className="pointer-events-none absolute inset-0 -z-0 overflow-hidden opacity-60">
+        <Lilies maxCount={8} minSize={250} maxSize={320} />
+      </div>
+
+      {/* Main content */}
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        {/* Portrait */}
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, scale: 0.8, rotate: 30 }}
-          whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{
-            rotate: {
-              type: "spring",
-              stiffness: 220,
-              damping: 18,
-              duration: 3,
-              delay: 0.5,
-            },
-            scale: {
-              type: "spring",
-              stiffness: 200,
-              damping: 20,
-            },
-            opacity: { duration: 1 },
-          }}
+          {...reveal(0)}
+          className="relative mx-auto flex w-full max-w-md items-center justify-center lg:max-w-none"
         >
-          <Image
-            src={
-              "https://res.cloudinary.com/dqgkvrmve/image/upload/v1779456528/me_kjagis.png"
-            }
-            width={400}
-            height={400}
-            alt=""
-            className="object-contain shadow-black  h-[35vh] z-40"
-          ></Image>
+          {/* Outer glow */}
+          <div className="pointer-events-none absolute h-[75%] w-[75%] rounded-full bg-[#0C1D74]/50 blur-[90px]" />
+
+          {/* Decorative orbital rings */}
+          <div className="pointer-events-none absolute h-[88%] w-[88%] rounded-full border border-white/[0.08]" />
+          <div className="pointer-events-none absolute h-[72%] w-[72%] rounded-full border border-[#5575FF]/20" />
+
+          {/* Image frame */}
+          <div className="relative w-full max-w-[390px]">
+            <div className="absolute -inset-3 rounded-[2rem] border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm" />
+
+            <div className="relative overflow-hidden rounded-[1.7rem] border border-white/10 bg-gradient-to-br from-[#0C1D74]/50 via-[#080D25] to-[#050816] p-3 shadow-[0_25px_100px_rgba(0,0,0,0.45)] sm:p-4">
+              <Image
+                src="https://res.cloudinary.com/dqgkvrmve/image/upload/v1779456528/me_kjagis.png"
+                width={600}
+                height={600}
+                alt="Portrait of the developer"
+                priority
+                className="relative z-10 h-auto max-h-[52vh] w-full object-contain sm:max-h-[58vh]"
+              />
+
+              {/* Bottom image fade */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[#050816]/50 to-transparent" />
+            </div>
+
+            {/* Floating role card */}
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: reduceMotion ? 0 : 0.65, duration: 0.5 }}
+              className="absolute -bottom-6 -right-2 z-30 flex items-center gap-3 rounded-2xl border border-white/10 bg-[#080D25]/90 px-4 py-3 shadow-2xl backdrop-blur-xl sm:-right-5 sm:px-5"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-400/20 bg-[#0C1D74]/50">
+                <Code2 size={20} className="text-blue-200" />
+              </div>
+
+              <div>
+                <p className="text-sm font-medium text-white">
+                  Full-Stack Developer
+                </p>
+                <p className="mt-1 text-xs text-slate-400">
+                  Building for the web
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Decorative corner details */}
+            <div className="absolute -left-5 -top-5 h-10 w-10 rounded-tl-2xl border-l border-t border-blue-300/50" />
+            <div className="absolute -bottom-5 -right-5 h-10 w-10 rounded-br-2xl border-b border-r border-blue-300/50" />
+          </div>
         </motion.div>
 
-        <div className="flex flex-col z-80 items-start gap-4 about-me-desc w-[70%]">
-          <div className="flex flex-col justify-center">
-            <motion.div
-              ref={ref}
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{
-                opacity: { delay: 0.1 },
-                x: { delay: 0.1, duration: 0.5 },
-              }}
-              viewport={{ once: true, amount: 0.5 }}
-            >
-              <Title text="ABOUT ME"></Title>
-            </motion.div>
-            <motion.div
-              ref={ref}
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{
-                opacity: { delay: 0.2 },
-                x: { delay: 0.2, duration: 0.5 },
-              }}
-              viewport={{ once: true, amount: 0.5 }}
-            >
-              <Label
-                className={`font-thin ${
-                  screenWidth <= 1000 ? "text-[12px]" : ""
-                } uppercase text-shadow-black [text-shadow:0px_0px_20px_rgba(0,0,0,1)]`}
-              >
-                Full-stack developer with 2+ years of experience, primarily
-                focused on frontend development using React and Next.js. Skilled
-                in translating UI/UX designs into responsive, high-performance
-                interfaces, while also capable of handling backend integrations
-                and API development as needed.
-              </Label>
-            </motion.div>
-          </div>
+        {/* About content */}
+        <div className="flex flex-col items-start gap-7 lg:py-8">
+          {/* About heading and introduction */}
+          <motion.div {...reveal(0.1)} className="max-w-2xl">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/[0.07] px-4 py-2">
+              <Code2 size={14} className="text-blue-300" />
+              <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-blue-200 sm:text-xs">
+                A little about me
+              </span>
+            </div>
+
+            <h2 className="text-5xl font-semibold leading-[0.95] tracking-[-0.07em] sm:text-6xl md:text-8xl">
+              BEHIND
+              <br />
+              <span className="bg-gradient-to-r from-blue-100 via-blue-400 to-violet-300 bg-clip-text text-transparent">
+                THE BUILD.
+              </span>
+            </h2>
+
+            <p className="mt-6 max-w-md text-sm leading-7 text-slate-400 sm:text-base">
+              Turning ideas into responsive interfaces and meaningful digital
+              experiences through thoughtful design and development.
+            </p>
+          </motion.div>
+          {/* About description */}
+          <motion.div {...reveal(0.2)} className="max-w-2xl">
+            <p className="text-base leading-8 text-slate-300 sm:text-lg sm:leading-9">
+              I&apos;m a{" "}
+              <span className="font-medium text-white">
+                Full-Stack Developer
+              </span>{" "}
+              with 2+ years of experience, primarily focused on frontend
+              development using{" "}
+              <span className="font-medium text-blue-200">
+                React and Next.js
+              </span>
+              .
+            </p>
+
+            <p className="mt-4 text-sm leading-7 text-slate-400 sm:text-base sm:leading-8">
+              I enjoy transforming UI/UX designs into responsive,
+              high-performance interfaces. I also work with backend integrations
+              and APIs to bring complete web experiences to life.
+            </p>
+          </motion.div>
+          {/* Skill highlights */}
           <motion.div
-            ref={ref}
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{
-              opacity: { delay: 0.3 },
-              x: { delay: 0.3, duration: 0.5 },
-            }}
-            viewport={{ once: true, amount: 0.5 }}
+            {...reveal(0.3)}
+            className="grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2"
           >
-            <Link target="_blank" href={"/RESUME-1.pdf"}>
-              <Button className="bg-white text-primary-blue-300 hover:text-white">
+            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.035] p-4 transition-colors duration-300 hover:border-blue-400/30 hover:bg-[#0C1D74]/20">
+              <p className="text-sm font-medium text-white">
+                Frontend Development
+              </p>
+              <p className="mt-2 text-xs leading-5 text-slate-400">
+                Responsive interfaces, UI implementation, and user experience.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.035] p-4 transition-colors duration-300 hover:border-blue-400/30 hover:bg-[#0C1D74]/20">
+              <p className="text-sm font-medium text-white">
+                Backend Integration
+              </p>
+              <p className="mt-2 text-xs leading-5 text-slate-400">
+                APIs, data connections, and application functionality.
+              </p>
+            </div>
+          </motion.div>
+          {/* Resume action */}
+          <motion.div
+            {...reveal(0.4)}
+            className="flex w-full flex-col items-start gap-4 pt-1 sm:w-auto sm:flex-row sm:items-center"
+          >
+            <Button
+              asChild
+              className="group h-12 rounded-xl border border-blue-300/20 bg-[#0C1D74] px-6 text-sm font-medium tracking-wide text-white shadow-[0_8px_30px_rgba(12,29,116,0.3)] transition-all duration-300 hover:bg-[#1735A0] hover:shadow-[0_8px_35px_rgba(12,29,116,0.5)]"
+            >
+              <Link
+                href="/RESUME-1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 DOWNLOAD RESUME
-              </Button>
-            </Link>
+                <ArrowUpRight
+                  size={17}
+                  className="ml-2 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </Link>
+            </Button>
+
+            <span className="text-xs tracking-wide text-slate-500">
+              Always learning. Always building.
+            </span>
           </motion.div>
         </div>
-      </motion.section>
-
-      <Lilies maxCount={8} minSize={250} maxSize={320}></Lilies>
-      <div className="w-full z-40  absolute bottom-0 flex items-center justify-center">
-        <Mouse
-          onClick={onClick}
-          size={50}
-          strokeWidth={1}
-          className="text-white cursor-pointer hover:scale-[1.2] duration-300 transition ease-in-out absolute bottom-10"
-        />
       </div>
-    </div>
+
+      {/* Scroll indicator */}
+      <motion.button
+        type="button"
+        onClick={onClick}
+        aria-label="Scroll to the next section"
+        initial={reduceMotion ? false : { opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: reduceMotion ? 0 : 0.8 }}
+        className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2 text-slate-400 transition-colors duration-300 hover:text-white sm:bottom-7"
+      >
+        <span className="hidden text-[10px] uppercase tracking-[0.25em] sm:block">
+          Explore more
+        </span>
+        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-blue-300/40 hover:bg-[#0C1D74]/40">
+          <Mouse size={19} strokeWidth={1.5} />
+          <ArrowDown
+            size={12}
+            className="absolute translate-y-5 animate-bounce"
+          />
+        </span>
+      </motion.button>
+    </section>
   );
 }
