@@ -330,9 +330,9 @@ export default function WorkExperience({ onClick }: { onClick: () => void }) {
       </div>
 
       {/* Existing section navigation */}
-      <div className="relative z-10 flex w-full justify-center pt-7">
+      {/* <div className="relative z-10 flex w-full justify-center pt-7">
         <ScrollIndicator target={5.7} />
-      </div>
+      </div> */}
     </section>
   );
 }

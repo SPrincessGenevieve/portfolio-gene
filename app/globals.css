@@ -256,3 +256,76 @@ Contact.blur {
   animation-play-state: paused;
 }
 
+@keyframes tech-orbit-forward {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes tech-orbit-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.tech-orbit-forward {
+  animation: tech-orbit-forward 70s linear infinite;
+  will-change: transform;
+}
+
+.tech-orbit-reverse {
+  animation: tech-orbit-reverse 90s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-orbit-forward,
+  .tech-orbit-reverse {
+    animation: none;
+  }
+}
+
+@keyframes tech-particle-blue {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-9px);
+    opacity: 1;
+  }
+}
+
+@keyframes tech-particle-violet {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 0.9;
+  }
+}
+
+.tech-particle-blue {
+  animation: tech-particle-blue 4s ease-in-out infinite;
+}
+
+.tech-particle-violet {
+  animation: tech-particle-violet 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-particle-blue,
+  .tech-particle-violet {
+    animation: none;
+  }
+}

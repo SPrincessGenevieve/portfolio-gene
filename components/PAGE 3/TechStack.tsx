@@ -2,7 +2,12 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useInView,
+} from "framer-motion";
 import {
   ArrowUpRight,
   Code2,
@@ -16,63 +21,63 @@ import Lilies from "../Lilies";
 const technologies = [
   {
     label: "HTML",
-    icon: "/stack/html.png",
+    icon: "https://res.cloudinary.com/bs2vsg8c/image/upload/v1792039943/html.png",
     category: "Frontend",
     description: "Building accessible, structured web experiences.",
     color: "#F97316",
   },
   {
     label: "Tailwind CSS",
-    icon: "/stack/tailwind.png",
+    icon: "https://res.cloudinary.com/bs2vsg8c/image/upload/v1792039943/tailwind.png",
     category: "Frontend",
     description: "Creating responsive interfaces with utility-first styling.",
     color: "#38BDF8",
   },
   {
     label: "JavaScript",
-    icon: "/stack/js.svg",
+    icon: "https://res.cloudinary.com/bs2vsg8c/image/upload/v1792039943/js.svg",
     category: "Frontend",
     description: "Bringing interfaces to life with interactive logic.",
     color: "#FACC15",
   },
   {
     label: "React",
-    icon: "/stack/react.png",
+    icon: "https://res.cloudinary.com/bs2vsg8c/image/upload/v1792039945/react.png",
     category: "Frontend",
     description: "Building reusable components and dynamic interfaces.",
     color: "#61DAFB",
   },
   {
     label: "Next.js",
-    icon: "/stack/next.png",
+    icon: "https://res.cloudinary.com/bs2vsg8c/image/upload/v1792039944/next.png",
     category: "Frontend",
     description: "Developing modern web applications with React.",
     color: "#FFFFFF",
   },
   {
     label: "Material UI",
-    icon: "/stack/mui.png",
+    icon: "https://res.cloudinary.com/bs2vsg8c/image/upload/v1792039944/mui.png",
     category: "Frontend",
     description: "Designing interfaces with reusable UI components.",
     color: "#60A5FA",
   },
   {
     label: "Framer Motion",
-    icon: "/stack/motion.png",
+    icon: "https://res.cloudinary.com/bs2vsg8c/image/upload/v1792039944/motion.png",
     category: "Frontend",
     description: "Creating expressive animations and fluid interactions.",
     color: "#C084FC",
   },
   {
     label: "Axios",
-    icon: "/stack/axios.png",
+    icon: "https://res.cloudinary.com/bs2vsg8c/image/upload/v1792039943/axios.png",
     category: "Backend",
     description: "Connecting applications to APIs and external services.",
     color: "#A78BFA",
   },
   {
     label: "Git",
-    icon: "/stack/git.png",
+    icon: "https://res.cloudinary.com/bs2vsg8c/image/upload/v1792039943/git.png",
     category: "Tools",
     description: "Managing source code and development workflows.",
     color: "#FB923C",
@@ -103,7 +108,7 @@ const technologies = [
   },
   {
     label: "Django",
-    icon: "/stack/django.svg",
+    icon: "https://res.cloudinary.com/bs2vsg8c/image/upload/v1792039943/django.svg",
     category: "Backend",
     description: "Developing web applications with Python.",
     color: "#4ADE80",
@@ -179,10 +184,16 @@ const categories = [
 export default function TechStack({ onClick }: { onClick?: () => void }) {
   const [selected, setSelected] = useState<Tech | null>(null);
   const [activeCategory, setActiveCategory] = useState("All");
-  const [spot, setSpot] = useState({ x: -1000, y: -1000 });
+  const spotlightRef = useRef<HTMLDivElement>(null);
 
   const sectionRef = useRef<HTMLElement>(null);
+
+  const isInView = useInView(sectionRef, {
+    margin: "100px 0px",
+  });
+
   const reducedMotion = useReducedMotion();
+  const shouldAnimate = isInView && !reducedMotion;
 
   const filteredTechnologies = technologies
     .map((tech, index) => ({ tech, index }))
@@ -201,20 +212,32 @@ export default function TechStack({ onClick }: { onClick?: () => void }) {
       ref={sectionRef}
       onMouseMove={(event) => {
         const rect = event.currentTarget.getBoundingClientRect();
-        setSpot({
-          x: event.clientX - rect.left,
-          y: event.clientY - rect.top,
-        });
+        const spotlight = spotlightRef.current;
+
+        if (!spotlight) return;
+
+        spotlight.style.setProperty(
+          "--spot-x",
+          `${event.clientX - rect.left}px`,
+        );
+
+        spotlight.style.setProperty(
+          "--spot-y",
+          `${event.clientY - rect.top}px`,
+        );
       }}
-      onMouseLeave={() => setSpot({ x: -1000, y: -1000 })}
+      // onMouseLeave={() => setSpot({ x: -1000, y: -1000 })}
       className="relative isolate w-full overflow-hidden rounded-[32px] px-4 py-16 text-white sm:px-8 md:px-12 md:py-24"
     >
       {/* Cursor spotlight */}
+      {/* Static ambient spotlight — no mouse tracking */}
       <div
+        ref={spotlightRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 transition-opacity duration-300"
+        className="pointer-events-none absolute inset-0 -z-10"
         style={{
-          background: `radial-gradient(450px circle at ${spot.x}px ${spot.y}px, rgba(59,130,246,0.12), transparent 72%)`,
+          background:
+            "radial-gradient(500px circle at 50% 35%, rgba(59,130,246,0.10), transparent 72%)",
         }}
       />
 
@@ -286,28 +309,21 @@ export default function TechStack({ onClick }: { onClick?: () => void }) {
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.8fr)] lg:gap-12">
           {/* Orbital constellation */}
           <div className="relative mx-auto aspect-square w-full max-w-[620px]">
-            <motion.div
+            <div
               aria-hidden="true"
-              animate={reducedMotion ? undefined : { rotate: 360 }}
-              transition={{
-                duration: 100,
-                repeat: Infinity,
-                ease: "linear",
+              className="tech-orbit tech-orbit-forward absolute inset-[8%] rounded-full border border-dashed border-blue-300/[0.15]"
+              style={{
+                animationPlayState: shouldAnimate ? "running" : "paused",
               }}
-              className="absolute inset-[8%] rounded-full border border-dashed border-blue-300/[0.15]"
             />
 
-            <motion.div
+            <div
               aria-hidden="true"
-              animate={reducedMotion ? undefined : { rotate: -360 }}
-              transition={{
-                duration: 70,
-                repeat: Infinity,
-                ease: "linear",
+              className="tech-orbit tech-orbit-reverse absolute inset-[19%] rounded-full border border-violet-300/[0.15]"
+              style={{
+                animationPlayState: shouldAnimate ? "running" : "paused",
               }}
-              className="absolute inset-[19%] rounded-full border border-violet-300/[0.15]"
             />
-
             <div className="absolute inset-[29%] rounded-full border border-white/[0.07]" />
 
             {/* Constellation connections */}
@@ -321,7 +337,7 @@ export default function TechStack({ onClick }: { onClick?: () => void }) {
                 const tech = technologies[index];
 
                 return (
-                  <motion.line
+                  <line
                     key={tech.label}
                     x1="50"
                     y1="50"
@@ -332,13 +348,6 @@ export default function TechStack({ onClick }: { onClick?: () => void }) {
                     }
                     strokeWidth={selected?.label === tech.label ? 0.45 : 0.12}
                     strokeOpacity={selected?.label === tech.label ? 0.9 : 0.35}
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      duration: reducedMotion ? 0 : 1,
-                      delay: reducedMotion ? 0 : index * 0.045,
-                    }}
                   />
                 );
               })}
@@ -408,7 +417,7 @@ export default function TechStack({ onClick }: { onClick?: () => void }) {
                         ? `0 0 28px ${tech.color}35`
                         : undefined,
                   }}
-                  className={`group absolute z-20 flex h-[12%] w-[12%] min-w-10 max-w-[70px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-2xl border bg-[#0b1225]/95 p-2 backdrop-blur-xl transition-colors duration-300 sm:rounded-[22px] sm:p-3 ${
+                  className={`group absolute z-20 flex h-[12%] w-[12%] min-w-10 max-w-[70px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-2xl border bg-[#0b1225] p-2 transition-colors duration-200 sm:rounded-[22px] sm:p-3 ${
                     isSelected
                       ? "bg-[#142342]"
                       : "hover:border-blue-300/60 hover:bg-[#111d36]"
@@ -427,7 +436,7 @@ export default function TechStack({ onClick }: { onClick?: () => void }) {
                     width={80}
                     height={80}
                     unoptimized
-                    className="relative z-10 h-full w-full object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.08)]"
+                    className="relative z-10 h-full w-full object-contain"
                   />
 
                   <span className="pointer-events-none absolute left-1/2 top-full z-40 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-white/10 bg-[#10182b] px-2 py-1 text-[9px] text-slate-200 opacity-0 shadow-xl transition-opacity group-hover:opacity-100">
@@ -438,34 +447,14 @@ export default function TechStack({ onClick }: { onClick?: () => void }) {
             })}
 
             {/* Floating particles */}
-            <motion.div
+            <div
               aria-hidden="true"
-              animate={
-                reducedMotion
-                  ? undefined
-                  : { y: [0, -9, 0], opacity: [0.5, 1, 0.5] }
-              }
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute left-[10%] top-[28%] h-1.5 w-1.5 rounded-full bg-blue-300 shadow-[0_0_12px_#60a5fa]"
+              className="tech-particle tech-particle-blue absolute left-[10%] top-[28%] h-1.5 w-1.5 rounded-full bg-blue-300"
             />
 
-            <motion.div
+            <div
               aria-hidden="true"
-              animate={
-                reducedMotion
-                  ? undefined
-                  : { y: [0, 8, 0], opacity: [0.4, 0.9, 0.4] }
-              }
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute bottom-[20%] right-[13%] h-2 w-2 rounded-full bg-violet-300 shadow-[0_0_15px_#a78bfa]"
+              className="tech-particle tech-particle-violet absolute bottom-[20%] right-[13%] h-2 w-2 rounded-full bg-violet-300"
             />
           </div>
 
@@ -521,17 +510,15 @@ export default function TechStack({ onClick }: { onClick?: () => void }) {
                         ? false
                         : {
                             opacity: 0,
-                            y: 12,
-                            filter: "blur(5px)",
+                            y: 8,
                           }
                     }
                     animate={{
                       opacity: 1,
                       y: 0,
-                      filter: "blur(0px)",
                     }}
-                    exit={reducedMotion ? undefined : { opacity: 0, y: -8 }}
-                    transition={{ duration: 0.25 }}
+                    exit={reducedMotion ? undefined : { opacity: 0, y: -5 }}
+                    transition={{ duration: 0.2 }}
                     className="relative"
                   >
                     <div className="mb-8 flex items-start justify-between gap-4">

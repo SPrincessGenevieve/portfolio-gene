@@ -381,9 +381,9 @@ export default function ProjectGallery() {
                     </p>
 
                     <div className="mt-7 flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
+                      {project.tags.map((tag, index) => (
                         <span
-                          key={tag}
+                          key={index}
                           className="rounded-full border border-white/10 bg-white/[0.025] px-3 py-1.5 text-[11px] tracking-wide text-slate-300 transition-colors duration-300 group-hover:border-blue-300/20"
                         >
                           {tag}
@@ -482,7 +482,7 @@ export default function ProjectGallery() {
         </div>
       </div>
 
-      <ScrollIndicator target={16.5} />
+      {/* <ScrollIndicator target={16.5} /> */}
     </section>
   );
 }

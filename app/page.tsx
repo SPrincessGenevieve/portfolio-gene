@@ -143,7 +143,7 @@ export default function Home() {
         >
           <TechStack />
           {/* ================= MOUSE ================= */}
-          <ScrollIndicator target={4.5}></ScrollIndicator>
+          {/* <ScrollIndicator target={4.5}></ScrollIndicator> */}
         </section>
 
         {/* Work Experience */}

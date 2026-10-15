@@ -115,7 +115,7 @@ export default function Intro({
             </Button>
           </motion.div>
 
-          <ScrollIndicator target={1}></ScrollIndicator>
+          {/* <ScrollIndicator target={1}></ScrollIndicator> */}
         </div>
         <Lilies maxCount={8} minSize={250} maxSize={320} />
       </motion.section>
