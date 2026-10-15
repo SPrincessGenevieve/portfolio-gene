@@ -56,7 +56,7 @@ const projects: Project[] = [
     category: "BUSINESS MANAGEMENT & ADMINISTRATION",
     description:
       "A centralized business administration platform built for WebMakePH to manage the entire client workflow, from lead tracking and client records to quotations, invoicing, payment processing, project management, scheduling, and website form submissions. Featuring secure administrator authentication, Supabase integration, and an integrated PayMongo payment workflow, the platform streamlines business operations through a unified dashboard.",
-    href: "https://admin-dev.webmakeph.online/",
+    href: "https://admin.webmakeph.online/",
     overlayImage:
       "https://res.cloudinary.com/bs2vsg8c/image/upload/v1791736874/cb077027-7f56-4d69-84f3-02136a4e53dc.png",
     tags: [
