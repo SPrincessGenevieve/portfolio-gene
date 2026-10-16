@@ -70,7 +70,7 @@ const projects: Project[] = [
     featured: true,
 
     demoCredentials: {
-      email: "admin@demo.local",
+      email: "test@webmakeph.online",
       password: "ThisIsATest123",
     },
   },
@@ -94,7 +94,7 @@ const projects: Project[] = [
     featured: true,
 
     demoCredentials: {
-      email: "admin@demo.local",
+      email: "test@webmakeph.online",
       password: "ThisIsATest123",
     },
   },
